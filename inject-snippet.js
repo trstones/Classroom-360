@@ -1,5 +1,6 @@
 window.addEventListener("load", function () {
-    console.log("Simple script loaded successfully! Step 7.");
+    console.log("Simple script loaded successfully! Step 8.");
 
-    document.body.innerHTML = "Content Added! This is dynamically added plain text." + document.body.innerHTML;
+    document.currentScript.insertAdjacentHTML('beforebegin', "Content Added! This is dynamically added plain text.");
+
 });
