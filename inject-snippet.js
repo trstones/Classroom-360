@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-    console.log("Simple script loaded successfully! Step 2.");
+    console.log("Simple script loaded successfully! Step 3.");
 
     const existingDiv = document.getElementById("external-snippet");
     if (existingDiv) {
