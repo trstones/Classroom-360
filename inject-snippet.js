@@ -1,6 +1,8 @@
 window.addEventListener("load", function () {
-    console.log("Simple script loaded successfully! Step 8.");
-
-    document.currentScript.insertAdjacentHTML('beforebegin', "Content Added! This is dynamically added plain text.");
-
+    const snippetDiv = document.querySelector('.external-snippet');
+    if (snippetDiv) {
+        snippetDiv.innerHTML = "New content!";
+    } else {
+        console.error("Snippet div not found.");
+    }
 });
