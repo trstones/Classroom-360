@@ -5,7 +5,6 @@ function loadSnippet() {
     return setTimeout(loadSnippet, 100);
   }
 
-
   fetch("https://trstones.github.io/Classroom-360/snippet.html")
     .then(response => response.text())
     .then(html => {
