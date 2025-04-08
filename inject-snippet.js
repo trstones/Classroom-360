@@ -1,10 +1,8 @@
 window.addEventListener("load", function () {
-    console.log("Simple script loaded successfully! Step 4.");
+    console.log("Simple script loaded successfully! Step 5.");
 
-    const existingDiv = document.getElementById("external-snippet");
-    if (existingDiv) {
-        existingDiv.innerText = "<h2>Content Added!</h2><p>This is dynamically added content.</p>";
-    } else {
-        console.error("Element not found.");
-    }
+    const textContent = "Content Added! This is dynamically added plain text.";
+
+    // Append plain text to the body
+    document.body.insertAdjacentHTML('beforeend', `<p>${textContent}</p>`);
 });
