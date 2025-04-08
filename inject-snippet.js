@@ -12,7 +12,7 @@
   }
 
   // Now fetch and inject the snippet
-  fetch("https://user.github.io/project/snippet.html")
+  fetch("https://trstones.github.io/Classroom-360/snippet.html")
     .then(res => res.text())
     .then(html => {
       container.innerHTML = html;
