@@ -22,6 +22,6 @@ window.addEventListener("load", function () {
         })
         .catch(error => {
             console.error("Error loading CSV:", error);
-            snippetDiv.innerHTML = "<p>Error loading data.</p>";
+            snippetDiv.innerHTML = "<p>Error loading the data.</p>";
         });
 });
