@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
     const snippetDiv = document.querySelector('.external-snippet');
 
-    fetch("room-data.csv")
+    fetch("https://trstones.github.io/Classroom-360/room-data.csv")
         .then(response => response.text())
         .then(csv => {
             const [headerLine, dataLine] = csv.trim().split('\n');
