@@ -8,6 +8,9 @@ window.addEventListener("load", function () {
             const labels = headerLine.split(',').map(h => h.trim());
             const values = dataLine.split(',').map(v => v.trim());
 
+            console.log("Labels:", labels);
+            console.log("Values:", values);
+
             if (labels.length !== values.length) {
                 snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
                 return;
