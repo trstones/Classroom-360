@@ -5,11 +5,10 @@ window.addEventListener("load", function () {
         .then(response => response.text())
         .then(csv => {
             const [headerLine, dataLine] = csv.trim().split('\n');
+            
+            // Parse CSV correctly by handling quotes properly
             const labels = headerLine.split(',').map(h => h.trim());
-            const values = dataLine.split(',').map(v => v.trim());
-
-            console.log("Labels:", labels);
-            console.log("Values:", values);
+            const values = parseCSVLine(dataLine);
 
             if (labels.length !== values.length) {
                 snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
@@ -25,6 +24,18 @@ window.addEventListener("load", function () {
         })
         .catch(error => {
             console.error("Error loading CSV:", error);
-            snippetDiv.innerHTML = "<p>Error loading the data.</p>";
+            snippetDiv.innerHTML = "<p>Error loading data.</p>";
         });
 });
+
+function parseCSVLine(line) {
+    const regex = /(".*?"|[^",\n]+)(?=\s*,|\s*$)/g;
+    const matches = [];
+    let match;
+    
+    while (match = regex.exec(line)) {
+        matches.push(match[0].replace(/"/g, '').trim());
+    }
+    
+    return matches;
+}
