@@ -3,10 +3,24 @@ window.addEventListener("load", function () {
     if (snippetDiv) {
         const roomType = "Auditorium";
         const seating = 125;
+        const technology = "Projector, cinema projector, surround sound";
+        const computer = "Mac Mini";
+        const ccid = "220265";
+        const os = "both";
+        const optDrive = "Yes";
+        const wireless = "Yes";
+        const vidRecord = "Yes";        
         
         snippetDiv.innerHTML =
             "<p><strong>Room Type:</strong> " + roomType + "</p>" +
-            "<p><strong>Seating:</strong> " + seating + "</p>";
+            "<p><strong>Seating:</strong> " + seating + "</p>" + 
+            "<p><strong>Technology:</strong> " + technology + "</p>" +
+            "<p><strong>Computer System:</strong> " + computer + "</p>" + 
+            "<p><strong>CCID:</strong> " + ccid + "</p>" +
+            "<p><strong>Operating System:</strong> " + os + "</p>" + 
+            "<p><strong>Optical Drive:</strong> " + optDrive + "</p>" +
+            "<p><strong>Wireless Projection:</strong> " + wireless + "</p>" + 
+            "<p><strong>Video Recording / Streaming:</strong> " + vidRecord + "</p>" + ;
     } else {
         console.error("Data not found.");
     }
