@@ -1,29 +1,27 @@
 window.addEventListener("load", function () {
     const snippetDiv = document.querySelector('.external-snippet');
-    if (snippetDiv) {
-        const roomType = "Auditorium";
-        const seating = 125;
-        const technology = "Projector, cinema projector, surround sound";
-        const computer = "Mac Mini";
-        const ccid = "220265";
-        const os = "both";
-        const optDrive = "Yes";
-        const wireless = "Yes";
-        const vidRecord = "Yes";        
-        
-        snippetDiv.innerHTML =
-            "<p><strong>Room Type:</strong> " + roomType + "</p>" +
-            "<p><strong>Seating:</strong> " + seating + "</p>" + 
-            "<p><strong>Technology:</strong> " + technology + "</p>" +
-            "<p><strong>Computer System:</strong> " + computer + "</p>" + 
-            "<ul>" + 
-            "<li>CCID: " + ccid + "</li>" +
-            "<li>Operating System: " + os + "</li>" + 
-            "</ul>" + 
-            "<p><strong>Optical Drive:</strong> " + optDrive + "</p>" +
-            "<p><strong>Wireless Projection:</strong> " + wireless + "</p>" + 
-            "<p><strong>Video Recording / Streaming:</strong> " + vidRecord + "</p>";
-    } else {
-        console.error("Data not found.");
-    }
+
+    fetch("room-data.csv")
+        .then(response => response.text())
+        .then(csv => {
+            const [headerLine, dataLine] = csv.trim().split('\n');
+            const labels = headerLine.split(',').map(h => h.trim());
+            const values = dataLine.split(',').map(v => v.trim());
+
+            if (labels.length !== values.length) {
+                snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
+                return;
+            }
+
+            let html = "";
+            for (let i = 0; i < labels.length; i++) {
+                html += `<p><strong>${labels[i]}:</strong> ${values[i]}</p>`;
+            }
+
+            snippetDiv.innerHTML = html;
+        })
+        .catch(error => {
+            console.error("Error loading CSV:", error);
+            snippetDiv.innerHTML = "<p>Error loading data.</p>";
+        });
 });
