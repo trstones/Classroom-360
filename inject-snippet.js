@@ -19,10 +19,10 @@ window.addEventListener("load", function () {
             "<ul>" + 
             "<li>CCID: " + ccid + "</li>" +
             "<li>Operating System: " + os + "</li>" + 
-            "/ul>" + 
+            "</ul>" + 
             "<p><strong>Optical Drive:</strong> " + optDrive + "</p>" +
             "<p><strong>Wireless Projection:</strong> " + wireless + "</p>" + 
-            "<p><strong>Video Recording / Streaming:</strong> " + vidRecord + "</p>" + ;
+            "<p><strong>Video Recording / Streaming:</strong> " + vidRecord + "</p>";
     } else {
         console.error("Data not found.");
     }
