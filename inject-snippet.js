@@ -16,8 +16,10 @@ window.addEventListener("load", function () {
             "<p><strong>Seating:</strong> " + seating + "</p>" + 
             "<p><strong>Technology:</strong> " + technology + "</p>" +
             "<p><strong>Computer System:</strong> " + computer + "</p>" + 
-            "<p><strong>CCID:</strong> " + ccid + "</p>" +
-            "<p><strong>Operating System:</strong> " + os + "</p>" + 
+            "<ul>" + 
+            "<li>CCID: " + ccid + "</li>" +
+            "<li>Operating System: " + os + "</li>" + 
+            "/ul>" + 
             "<p><strong>Optical Drive:</strong> " + optDrive + "</p>" +
             "<p><strong>Wireless Projection:</strong> " + wireless + "</p>" + 
             "<p><strong>Video Recording / Streaming:</strong> " + vidRecord + "</p>" + ;
