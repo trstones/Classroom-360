@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
     // Try to extract ID from HTML comment like <!--ID=2-->
     
     // Try to find the RoomID value from the <p> tag in the div
-    const roomIdElement = snippetDiv.querySelector('p');
+    const roomIdElement = snippetDiv.querySelectorAll('p')[1]; // Select the second <p> tag
     const roomIdMatch = roomIdElement ? roomIdElement.innerHTML.match(/RoomID=(\d+)/i) : null;
 
     if (!roomIdMatch) {
@@ -25,6 +25,7 @@ window.addEventListener("load", function () {
     const roomId = roomIdMatch[1]; // Extracted RoomID value
 
     console.log("Room ID:", roomId);
+
 
     // --- Main Program ---
     fetch(csvUrl)
