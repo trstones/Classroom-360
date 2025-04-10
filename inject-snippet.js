@@ -12,7 +12,10 @@ window.addEventListener("load", function () {
     }
 
     // Try to extract ID from HTML comment like <!--ID=2-->
+    
     const idMatch = snippetDiv.innerHTML.match(/<!--\s*ID=(\d+)\s*-->/i);
+    console.error(snippetDiv)
+    console.error(idMatch)
     if (!idMatch) {
         snippetDiv.innerHTML = "<p><em>Error: No ID found on this page.</em></p>";
         return;
