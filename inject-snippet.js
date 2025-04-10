@@ -34,7 +34,7 @@ window.addEventListener("load", function () {
     
     console.log("Found ID:", targetId);
 
-    const targetId = idMatch[1];
+    //const targetId = idMatch[1];
     console.log("Looking for ID:", targetId);
 
     fetch(csvUrl)
