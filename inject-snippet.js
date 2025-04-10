@@ -1,26 +1,62 @@
 window.addEventListener("load", function () {
-    const snippetDiv = document.querySelector('.external-snippet');
+    // === CONFIGURATION ===
+    const csvUrl = "https://trstones.github.io/Classroom-360/room-data.csv";
+    const keyColumn = "ID"; // This must match the header name in CSV
+    const columnsToIgnore = ["ID"]; // Add any header labels to hide in the KB
 
-    fetch("https://trstones.github.io/Classroom-360/room-data.csv")
+    // === SCRIPT START ===
+    const snippetDiv = document.querySelector('.external-snippet');
+    if (!snippetDiv) return;
+
+    const targetId = snippetDiv.getAttribute("data-id");
+    if (!targetId) {
+        snippetDiv.innerHTML = "<p>Error: data-id attribute missing.</p>";
+        return;
+    }
+
+    fetch(csvUrl)
         .then(response => response.text())
         .then(csv => {
-            const [headerLine, dataLine] = csv.trim().split('\n');
-            
-            // Parse CSV correctly by handling quotes properly
-            const labels = headerLine.split(',').map(h => h.trim());
-            const values = parseCSVLine(dataLine);
+            const rows = csv.trim().split("\n").map(row => {
+                // Handle commas inside quoted values
+                const values = [];
+                let current = '', insideQuotes = false;
+                for (let char of row) {
+                    if (char === '"' && insideQuotes) {
+                        insideQuotes = false;
+                    } else if (char === '"' && !insideQuotes) {
+                        insideQuotes = true;
+                    } else if (char === ',' && !insideQuotes) {
+                        values.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                values.push(current.trim());
+                return values;
+            });
 
-            console.log("Labels:", labels);
-            console.log("Values:", values);
+            const headers = rows[0];
+            const targetIndex = headers.indexOf(keyColumn);
+            if (targetIndex === -1) {
+                snippetDiv.innerHTML = "<p>Error: Key column not found.</p>";
+                return;
+            }
 
-            if (labels.length !== values.length) {
-                snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
+            const targetRow = rows.find((row, i) => i > 0 && row[targetIndex] === targetId);
+            if (!targetRow) {
+                snippetDiv.innerHTML = "<p>No matching data found for ID " + targetId + ".</p>";
                 return;
             }
 
             let html = "";
-            for (let i = 0; i < labels.length; i++) {
-                html += `<p><strong>${labels[i]}:</strong> ${values[i]}</p>`;
+            for (let i = 0; i < headers.length; i++) {
+                const label = headers[i];
+                const value = targetRow[i];
+                if (!columnsToIgnore.includes(label)) {
+                    html += `<p><strong>${label}:</strong> ${value}</p>`;
+                }
             }
 
             snippetDiv.innerHTML = html;
@@ -30,15 +66,3 @@ window.addEventListener("load", function () {
             snippetDiv.innerHTML = "<p>Error loading data.</p>";
         });
 });
-
-function parseCSVLine(line) {
-    const regex = /(".*?"|[^",\n]+)(?=\s*,|\s*$)/g;
-    const matches = [];
-    let match;
-    
-    while (match = regex.exec(line)) {
-        matches.push(match[0].replace(/"/g, '').trim());
-    }
-    
-    return matches;
-}
