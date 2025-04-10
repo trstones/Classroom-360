@@ -4,13 +4,12 @@ window.addEventListener("load", function () {
     const keyColumn = "ID"; // This must match the header name in CSV
     const columnsToIgnore = ["ID"]; // Add any header labels to hide in the KB
 
+    // === SCRIPT START ===
     console.log("Looking for .external-snippet...");
     const snippetDiv = document.querySelector(".external-snippet");
     console.log("Found element:", snippetDiv);
     console.log("Data ID:", snippetDiv?.dataset.id);
-
-    // === SCRIPT START ===
-    const snippetDiv = document.querySelector('.external-snippet');
+    
     if (!snippetDiv) return;
 
     const targetId = snippetDiv.getAttribute("data-id");
