@@ -13,10 +13,12 @@ window.addEventListener("load", function () {
 
     // Try to extract ID from HTML comment like <!--ID=2-->
     
-    // Extract ID from comment inside the snippetDiv
+    console.log("Raw snippetDiv HTML:", snippetDiv.innerHTML);  // Log raw HTML of the div
+    
     let targetId = null;
     for (const node of snippetDiv.childNodes) {
         if (node.nodeType === Node.COMMENT_NODE) {
+            console.log("Found comment node:", node.nodeValue);  // Log the content of each comment node
             const match = node.nodeValue.match(/ID=(\d+)/i);
             if (match) {
                 targetId = match[1];
@@ -25,12 +27,12 @@ window.addEventListener("load", function () {
         }
     }
     
-    console.log("Found ID:", targetId);
-    
     if (!targetId) {
         snippetDiv.innerHTML = "<p><em>Error: No ID found on this page.</em></p>";
         return;
     }
+    
+    console.log("Found ID:", targetId);
 
     const targetId = idMatch[1];
     console.log("Looking for ID:", targetId);
