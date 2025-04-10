@@ -13,30 +13,20 @@ window.addEventListener("load", function () {
 
     // Try to extract ID from HTML comment like <!--ID=2-->
     
-    console.log("Raw snippetDiv HTML:", snippetDiv.innerHTML);  // Log raw HTML of the div
-    
-    let targetId = null;
-    for (const node of snippetDiv.childNodes) {
-        if (node.nodeType === Node.COMMENT_NODE) {
-            console.log("Found comment node:", node.nodeValue);  // Log the content of each comment node
-            const match = node.nodeValue.match(/ID=(\d+)/i);
-            if (match) {
-                targetId = match[1];
-                break;
-            }
-        }
-    }
-    
-    if (!targetId) {
-        snippetDiv.innerHTML = "<p><em>Error: No ID found on this page.</em></p>";
+    // Try to find the RoomID value from the <p> tag in the div
+    const roomIdElement = snippetDiv.querySelector('p');
+    const roomIdMatch = roomIdElement ? roomIdElement.innerHTML.match(/RoomID=(\d+)/i) : null;
+
+    if (!roomIdMatch) {
+        snippetDiv.innerHTML = "<p><em>Error: No RoomID found in the page.</em></p>";
         return;
     }
-    
-    console.log("Found ID:", targetId);
 
-    //const targetId = idMatch[1];
-    console.log("Looking for ID:", targetId);
+    const roomId = roomIdMatch[1]; // Extracted RoomID value
 
+    console.log("Room ID:", roomId);
+
+    // --- Main Program ---
     fetch(csvUrl)
         .then(response => response.text())
         .then(csvText => {
