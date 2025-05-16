@@ -5,12 +5,15 @@ window.addEventListener("load", function () {
         .then(response => response.text())
         .then(csv => {
             const roomID = getRoomID();
+            const excludeList = ["ID", "CCID"];
             const lines = csv.trim().split('\n');
             const headerLine = lines[0];
             const dataLine = lines.slice(1).find(line => {
                 const firstValue = line.split(',')[0].trim();
                 return firstValue === roomID;
             });
+
+            excludeFields(headerLine, dataLine, excludeList);
             //const [headerLine, dataLine] = csv.trim().split('\n');
             
             // Parse CSV correctly by handling quotes properly
@@ -48,6 +51,15 @@ function getRoomID() {
     }
 
     return "";
+}
+
+function excludeFields(headers, values, exclude) {
+    for (let i = headers.length - 1; i >= 0; i--) {
+        if (exclude.includes(headers[i])) {
+            headers.splice(i, 1);
+            values.splice(i, 1);
+        }
+    }
 }
 
 function parseCSVLine(line) {
