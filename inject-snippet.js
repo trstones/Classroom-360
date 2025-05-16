@@ -29,6 +29,7 @@ window.addEventListener("load", function () {
 
             let html = "";
             for (let i = 0; i < labels.length; i++) {
+                const value = values[i] ?? "";
                 html += `<p><strong>${labels[i]}:</strong> ${values[i]}</p>`;
             }
 
