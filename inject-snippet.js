@@ -4,7 +4,14 @@ window.addEventListener("load", function () {
     fetch("https://trstones.github.io/Classroom-360/room-data.csv")
         .then(response => response.text())
         .then(csv => {
-            const [headerLine, dataLine] = csv.trim().split('\n');
+            const roomID = "1";
+            const lines = csv.trim().split('\n');
+            const headerLine = lines[0];
+            const dataLine = lines.slice(1).find(line => {
+                const firstValue = line.split(',')[0].trim();
+                return firstValue === roomID;
+            });
+            //const [headerLine, dataLine] = csv.trim().split('\n');
             
             // Parse CSV correctly by handling quotes properly
             const labels = headerLine.split(',').map(h => h.trim());
