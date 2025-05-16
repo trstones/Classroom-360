@@ -66,15 +66,19 @@ function excludeFields(headers, values, exclude) {
 
 function parseCSVLine(line) {
     console.log("Parse line (input):", line);
-    const regex = /(".*?"|[^",\n]*)(?=\s*,|\s*$)/g;
+    const regex = /(".*?"|[^",]*)(?:,|$)/g;
     const matches = [];
     let match;
 
     while ((match = regex.exec(line)) !== null) {
-        if (match.index === regex.lastIndex) {
-            regex.lastIndex++;
-        }
-        matches.push(match[0].replace(/"/g, '').trim());
+        let field = match[1];
+
+        if (field.startsWith('"') && field.endsWith('"')) {
+             field = field.substring(1, field.length - 1);
+             field = field.replace(/""/g, '"');
+         }
+
+        matches.push(field.trim());
     }
     console.log("Parse line (output):", matches);
     return matches;
