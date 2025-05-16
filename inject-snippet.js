@@ -22,10 +22,10 @@ window.addEventListener("load", function () {
             console.log("Labels:", labels);
             console.log("Values:", values);
 
-            if (labels.length !== values.length) {
-                snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
-                return;
-            }
+            //if (labels.length !== values.length) {
+            //    snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
+            //    return;
+            //}
 
             let html = "";
             for (let i = 0; i < labels.length; i++) {
