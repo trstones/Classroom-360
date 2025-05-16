@@ -13,12 +13,14 @@ window.addEventListener("load", function () {
                 return firstValue === roomID;
             });
 
-            excludeFields(headerLine, dataLine, excludeList);
+            
             //const [headerLine, dataLine] = csv.trim().split('\n');
             
             // Parse CSV correctly by handling quotes properly
             const labels = headerLine.split(',').map(h => h.trim());
             const values = parseCSVLine(dataLine);
+
+            excludeFields(labels, values, excludeList);
 
             console.log("Labels:", labels);
             console.log("Values:", values);
