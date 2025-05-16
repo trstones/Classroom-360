@@ -65,8 +65,16 @@ function excludeFields(headers, values, exclude) {
 }
 
 function parseCSVLine(line) {
-    const values = line.match(/(".*?"|[^",\n]*)(?=,|$)/g) || [];
-    return values.map(cell =>
-        cell.replace(/^"|"$/g, '').trim()
-    );
+    const regex = /(".*?"|[^",\n]*)(?=\s*,|\s*$)/g;
+    const matches = [];
+    let match;
+
+    while ((match = regex.exec(line)) !== null) {
+        if (match.index === regex.lastIndex) {
+            regex.lastIndex++;
+        }
+        matches.push(match[0].replace(/"/g, '').trim());
+    }
+
+    return matches;
 }
