@@ -20,7 +20,6 @@ window.addEventListener("load", function () {
             const labels = headerLine.split(',').map(h => h.trim());
             const values = parseCSVLine(dataLine);
 
-            console.log("HELLO");
             console.log("Labels:", labels);
             console.log("Values:", values);
 
@@ -55,12 +54,17 @@ function getRoomID() {
 }
 
 function excludeFields(headers, values, exclude) {
+    console.log("*****");
+    console.log("Headers:", headers);
+    console.log("Values:", values);
     for (let i = headers.length - 1; i >= 0; i--) {
         if (exclude.includes(headers[i])) {
             headers.splice(i, 1);
             values.splice(i, 1);
         }
     }
+    console.log("Headers:", headers);
+    console.log("Values:", values);
 }
 
 function parseCSVLine(line) {
