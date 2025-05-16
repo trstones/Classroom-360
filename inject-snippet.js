@@ -65,6 +65,7 @@ function excludeFields(headers, values, exclude) {
 }
 
 function parseCSVLine(line) {
+    console.log("Parse line (input):", line);
     const regex = /(".*?"|[^",\n]*)(?=\s*,|\s*$)/g;
     const matches = [];
     let match;
@@ -75,6 +76,6 @@ function parseCSVLine(line) {
         }
         matches.push(match[0].replace(/"/g, '').trim());
     }
-
+    console.log("Parse line (output):", matches);
     return matches;
 }
