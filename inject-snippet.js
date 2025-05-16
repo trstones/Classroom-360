@@ -4,7 +4,7 @@ window.addEventListener("load", function () {
     fetch("https://trstones.github.io/Classroom-360/room-data.csv")
         .then(response => response.text())
         .then(csv => {
-            const roomID = "1";
+            const roomID = getRoomID();
             const lines = csv.trim().split('\n');
             const headerLine = lines[0];
             const dataLine = lines.slice(1).find(line => {
@@ -37,6 +37,18 @@ window.addEventListener("load", function () {
             snippetDiv.innerHTML = "<p>Error loading data.</p>";
         });
 });
+
+function getRoomID() {
+    const paragraphs = document.querySelectorAll('.external-snippet p');
+
+    for (const p of paragraphs) {
+        if (p.textContent.includes('RoomID=')) {
+            return p.textContent.replace('RoomID=', '');
+        }
+    }
+
+    return "";
+}
 
 function parseCSVLine(line) {
     const regex = /(".*?"|[^",\n]+)(?=\s*,|\s*$)/g;
