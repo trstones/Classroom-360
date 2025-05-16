@@ -58,8 +58,12 @@ function excludeFields(headers, values, exclude) {
     console.log("Exclude:", exclude);
     console.log("Headers:", headers);
     console.log("Values:", values);
+    console.log("*****");
     for (let i = headers.length - 1; i >= 0; i--) {
+        console.log("Checking:", headerLine[i], "against excludeList");
+        
         if (exclude.includes(headers[i])) {
+            console.log("Excluding:", headerLine[i]);
             headers.splice(i, 1);
             values.splice(i, 1);
         }
