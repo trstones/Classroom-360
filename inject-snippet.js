@@ -55,6 +55,7 @@ function getRoomID() {
 
 function excludeFields(headers, values, exclude) {
     console.log("*****");
+    console.log("Exclude:", exclude);
     console.log("Headers:", headers);
     console.log("Values:", values);
     for (let i = headers.length - 1; i >= 0; i--) {
