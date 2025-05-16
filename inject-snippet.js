@@ -12,18 +12,14 @@ window.addEventListener("load", function () {
                 const firstValue = line.split(',')[0].trim();
                 return firstValue === roomID;
             });
-
             
-            //const [headerLine, dataLine] = csv.trim().split('\n');
-            
-            // Parse CSV correctly by handling quotes properly
             const labels = headerLine.split(',').map(h => h.trim());
             const values = parseCSVLine(dataLine);
 
             excludeFields(labels, values, excludeList);
 
-            console.log("Labels:", labels);
-            console.log("Values:", values);
+            //console.log("Labels:", labels);
+            //console.log("Values:", values);
 
             if (labels.length !== values.length) {
                 snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
@@ -56,22 +52,12 @@ function getRoomID() {
 }
 
 function excludeFields(headers, values, exclude) {
-    console.log("*****");
-    console.log("Exclude:", exclude);
-    console.log("Headers:", headers);
-    console.log("Values:", values);
-    console.log("*****");
     for (let i = headers.length - 1; i >= 0; i--) {
-        console.log("Checking:", headers[i], "against excludeList");
-        
         if (exclude.includes(headers[i])) {
-            console.log("Excluding:", headers[i]);
             headers.splice(i, 1);
             values.splice(i, 1);
         }
     }
-    console.log("Headers:", headers);
-    console.log("Values:", values);
 }
 
 function parseCSVLine(line) {
