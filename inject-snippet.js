@@ -20,6 +20,7 @@ window.addEventListener("load", function () {
             const labels = headerLine.split(',').map(h => h.trim());
             const values = parseCSVLine(dataLine);
 
+            console.log("HELLO");
             console.log("Labels:", labels);
             console.log("Values:", values);
 
