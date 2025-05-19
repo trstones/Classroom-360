@@ -65,6 +65,39 @@ function excludeFields(headers, values, exclude) {
 }
 
 function parseCSVLine(line) {
+    const result = [];
+    let inQuotes = false;
+    let currentField = '';
+
+    for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    
+    if (char === '"') {
+      // Check if this is an escaped quote (double quote) inside a quoted field
+      if (inQuotes && i + 1 < line.length && line[i + 1] === '"') {
+        currentField += '"';
+        i++; // Skip the next quote character
+      } else {
+        // Toggle the inQuotes flag
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // End of field
+      result.push(currentField.trim());
+      currentField = '';
+    } else {
+      currentField += char;
+    }
+  }
+  
+  // Add the last field
+  result.push(currentField.trim());
+  
+  return result;
+}
+
+/**
+function parseCSVLine(line) {
     console.log("Parse line (input):", line);
     const regex = /(".*?"|[^",]*)(?:,|$)/g;
     const matches = [];
@@ -83,3 +116,5 @@ function parseCSVLine(line) {
     console.log("Parse line (output):", matches);
     return matches;
 }
+*/
+
