@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>360 Viewer</title>
+  <link rel="stylesheet" type="text/css" href="../pannellum/pannellum.css"/>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+    }
+    #panorama {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="panorama"></div>
+
+  <script type="text/javascript" src="../pannellum/pannellum.js"></script>
+  <script>
+    pannellum.viewer('panorama', {
+      type: 'equirectangular',
+      panorama: '../Images360/Lovejoy_404_2024.jpg',
+      autoLoad: true
+    });
+  </script>
+</body>
+</html>
