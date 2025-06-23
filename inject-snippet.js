@@ -35,6 +35,7 @@ window.addEventListener("load", function () {
                 }
             }
 
+            html += '<br>';
             html += '<h3>360 Image</strong></h3>';
             html += '<p><i>Click and drag to rotate</i></p>';
 
