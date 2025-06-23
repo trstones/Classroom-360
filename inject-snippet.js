@@ -35,6 +35,9 @@ window.addEventListener("load", function () {
                 }
             }
 
+            html += '<p><strong>360 Image</strong></p>';
+            html += '<p>Click and drag to rotate</p>';
+
             snippetDiv.innerHTML = html;
         })
         .catch(error => {
