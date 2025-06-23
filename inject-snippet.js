@@ -35,8 +35,8 @@ window.addEventListener("load", function () {
                 }
             }
 
-            html += '<p><strong>360 Image</strong></p>';
-            html += '<p>Click and drag to rotate</p>';
+            html += '<h3>360 Image</strong></h3>';
+            html += '<p><i>Click and drag to rotate</i></p>';
 
             snippetDiv.innerHTML = html;
         })
