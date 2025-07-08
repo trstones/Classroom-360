@@ -10,7 +10,7 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6818,Arey 202,Arey,202,Lab/Seminar,Instructional Lab,Bio ,18,"Projector, Side TV, 9 iMacs",,230125,iMac,Mac,No,No,9,No,No
 6819,Arey 205,Arey,205,Lab/Seminar,Instructional Lab,Bio,18,"Projector, 9 Classroom iMacs, Printer",,230135,iMac,Mac,No,No,9,No,No
 6820,Arey 207,Arey,207,Lab/Seminar,Instructional Lab,Bio,19,"Projector, 9Classroom iMacs",,230145,iMac,Mac,No,No,9,No,No
-1,Arey 302,Arey,302,Lab/Seminar,Instructional Lab,,,2 classroom imacs,,180008,PC,Windows,No,No,2,No,No
+1,Arey 302,Arey,302,Lab/Seminar,Instructional Lab,,12,2 classroom imacs,,180008,PC,Windows,No,No,2,No,No
 6821,Arey 305,Arey,305,Lab/Seminar,Instructional Lab,Bio,18,"Projector, 6 Classroom iMacs",,,iMac,Mac,No,No,6,No,No
 6822,Arey 307,Arey,307,Lab/Seminar,Instructional Lab,Bio,24,"Projector, Printer",,190318,iMac,Mac,No,No,,No,No
 6735,Bixler 075,Bixler,75,Classroom,Classroom,Art,40,"Projector, Doc Cam (ELMO)",,210932,Mac Mini,Mac,No,No,,No,No
@@ -23,7 +23,7 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6811,Bixler 178 (Given),Bixler,178 (Given),Auditorium,Lecture Hall,Art/Music/Cinema,350,,,,,,,,,No,No
 6824,Bixler 219,Bixler,219,Studio,Classroom,Music,30,,,,,,,,,No,No
 6741,Bixler 226,Bixler,226,Classroom,Classroom,Music,25,Projector,,25200,Mac Mini,Mac,No,No,,No,No
-2,,Bixler ,250,,Studio,,,,,,,,,,,No,No
+2,,Bixler ,250,,Studio,,20,,,,,,,,,No,No
 6742,Bixler 278,Bixler,278,Studio,Studio,Art,20,"Projector, 14 Classroom iMacs, 2 Epson Photo Scanners",,180404,iMac Pro,Mac,No,Yes,14,No,No
 6743,Bixler 283,Bixler,283,Studio,Studio,Art,20,"Projector, Doc Cam (Samsung), Epson scanners, Wacom tablets ",,230564,Mac Mini,Mac,No,No,16,No,No
 6826,Bixler 302,Bixler,302,Studio,Classroom,Art,20,,,,,,,,,No,No
@@ -33,7 +33,7 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6746,Davis 122,Davis,122,Robotics Lab,Instructional Lab,CompSci,16,"Side TV, 15 Classroom Dells, Suspended Outlets",No classroom computer,,,Mac,No,No,15,No,No
 6827,Davis 132,Davis,132,Conference,Seminar Classroom,Psych,12,"Projector, Eno Board, Printer",,7040-220064,PC,Windows,No,No,,No,No
 6747,Davis 201,Davis,201,Classroom,Classroom,Math,34,Projector ,Oppo BluRay,190183,iMac,Mac,Yes,No,,No,No
-8407,Davis 216,Davis,216,Computer Lab,Computer Classroom,,14?,"14 Classroom iMacs, Printer",No classroom computer,,,,No,No,14,No,No
+8407,Davis 216,Davis,216,Computer Lab,Computer Classroom,,30,"14 Classroom iMacs, Printer",No classroom computer,,,,No,No,14,No,No
 6748,Davis 217,Davis,217,Seminar,Seminar Classroom,Math,16,Projector,Oppo BluRay,22237,iMac,Mac,Yes,No,,No,No
 6828,Davis 300,Davis,300,Lab/Seminar,Seminar Classroom,Psych,12,"Projector, Doc Cam",,190473,PC,Windows,No,No,,No,No
 6749,Davis 301,Davis,301,Classroom,Classroom,Psych,48,"Projector, Eno board ",Oppo BluRay,190516,PC,Windows,Yes,No,,No,No
@@ -45,7 +45,7 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6754,Diamond 141,Diamond,141,Classroom,Classroom,Gov/Econ,50,"Projector, Acoustic Panels ",,7050-180031,PC,Windows,Yes,Yes,,No,No
 6812,Diamond 142 (Ostrove),Diamond,142 (Ostrove),Auditorium,Lecture Hall,Gov/Econ,182,"3 Projectors, Acoustic Panels, Microphone (adjustable, wireless)",Oppo BluRay,210920,Mac Mini,Both,Yes,Yes,,Yes,No
 6755,Diamond 145,Diamond,145,Classroom,Classroom,Gov/Econ,40,"Projector, Acoustic Panels",,5090-210802,PC,Windows,Yes,Yes,,No,No
-3,Diamond 146,Diamond,146,Conference,Seminar Classroom,,,Projector,,210898,Mac Mini,Mac,Yes,No,,,
+3,Diamond 146,Diamond,146,Conference,Seminar Classroom,,20,Projector,,210898,Mac Mini,Mac,Yes,No,,,
 6756,Diamond 153,Diamond,153,Classroom,Classroom,Gov/Econ,40,"Projector, Acoustic panels",,7050-180026,PC,Windows,Yes,Yes,,No,No
 6757,Diamond 221,Diamond,221,Seminar,Seminar Classroom,Soc,20,Projector,,180298,iMac,Mac,Yes,Yes,,No,No
 6758,Diamond 222,Diamond,222,Computer Lab,Computer Classroom,GIS,16,"Projector, B/W Printer, Color Printer, Scanner",Height adjustable standing desk,5720-180446,PC,Windows,Yes,Yes,16,No,No
@@ -59,17 +59,17 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6766,Diamond 342,Diamond,342,grpwork,Seminar Classroom,(Classroom),24,Projector ,,7050-180020,PC,Windows,Yes,Yes,,No,No
 6767,Diamond 343,Diamond,343,Seminar,Seminar Classroom,Gov,20,Projector,,7050-180023,PC,Windows,Yes,Yes,,No,No
 6768,Diamond 344,Diamond,344,grpwork,Seminar Classroom,(Classroom),24,"Projector, Acoustic panels ",,210813,Mac Mini,Mac,Yes,Yes,,Yes,No
-11002,Gordon 110 (Studio 1),Gordon,110,Studio,Studio,,,Projector,,,,,,,,Yes,No
-11003,Gordon 120 (Arts Incubator),Gordon,120,Computer Lab/Seminar,Computer Classroom,,,"Projector, various synthesizers, 2 3D printers, printer, postscript printer, TV, Rokit speakers, dual monitor lab computers ",,230184,Mac Mini,Mac,No,Yes,16,Yes,No
-11004,Gordon 130 (Studio 2),Gordon,130,Studio,Studio,,,,,,,,,,,Yes,No
-11005,Gordon 140 (Performance Hall),Gordon,140,Auditorium,Lecture Hall,,,,,,,,,,,Yes,No
-11006,Gordon 180 (Green Room),Gordon,180,Classroom,Classroom,,,Projector,,,,,No,Yes,,Yes,No
-11007,Gordon 190 (Scene Shop),Gordon,190,Lab/Seminar,Instructional Lab,,,,,,,,,,,No,No
-11008,Gordon 220 (Studio 3),Gordon,220,Studio,Studio,,,,,,,,,,,Yes,No
-11009,Gordon 270,Gordon,270,Seminar,Seminar Classroom,,,"Projector, acoustic panels",,,,,No,Yes,,No,No
-11010,Gordon 280 (Rehearsal Room),Gordon,280,Studio,Studio,,,,,,,,No,Yes,,Yes,No
-11011,Gordon G10 (Film Screening),Gordon,G10,Auditorium,Lecture Hall,,,"Projector, film screen",,,,,Yes,Yes,,No,No
-11012,Gordon G60,Gordon,G60,Seminar,Seminar Classroom,,,"Projector, acoustic pads",,,,,No,Yes,,No,No
+11002,Gordon 110 (Studio 1),Gordon,110,Studio,Studio,,25,Projector,,,,,,,,Yes,No
+11003,Gordon 120 (Arts Incubator),Gordon,120,Computer Lab/Seminar,Computer Classroom,,29,"Projector, various synthesizers, 2 3D printers, printer, postscript printer, TV, Rokit speakers, dual monitor lab computers ",,230184,Mac Mini,Mac,No,Yes,16,Yes,No
+11004,Gordon 130 (Studio 2),Gordon,130,Studio,Studio,,328,,,,,,,,,Yes,No
+11005,Gordon 140 (Performance Hall),Gordon,140,Auditorium,Lecture Hall,,25,,,,,,,,,Yes,No
+11006,Gordon 180 (Green Room),Gordon,180,Classroom,Classroom,,30,Projector,,,,,No,Yes,,Yes,No
+11007,Gordon 190 (Scene Shop),Gordon,190,Lab/Seminar,Instructional Lab,,4,,,,,,,,,No,No
+11008,Gordon 220 (Studio 3),Gordon,220,Studio,Studio,,16,,,,,,,,,Yes,No
+11009,Gordon 270,Gordon,270,Seminar,Seminar Classroom,,12,"Projector, acoustic panels",,,,,No,Yes,,No,No
+11010,Gordon 280 (Rehearsal Room),Gordon,280,Studio,Studio,,12,,,,,,No,Yes,,Yes,No
+11011,Gordon G10 (Film Screening),Gordon,G10,Auditorium,Lecture Hall,,52,"Projector, film screen",,,,,Yes,Yes,,No,No
+11012,Gordon G60,Gordon,G60,Seminar,Seminar Classroom,,16,"Projector, acoustic pads",,,,,No,Yes,,No,No
 6769,Keyes 102,Keyes,102,Classroom,Classroom,Math,30,Projector,,180650,Mac Mini,Mac,Yes,No,,No,No
 6770,Keyes 103,Keyes,103,Classroom,Classroom,Chem,20,Projector,,210263,Mac Mini,Mac,Yes,No,,No,No
 6771,Keyes 104,Keyes,104,Seminar,Seminar Classroom,Chem,10,"Projector, ",Rolling Cart,190127,iMac,Mac,No,Yes,,No,No
@@ -80,7 +80,7 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6833,Keyes 305,Keyes,305,Lab/Seminar,Instructional Lab,Chem,25,No projector,,,,,No,No,,No,No
 6834,Keyes 405,Keyes,405,Lab/Seminar,Instructional Lab,Chem,25,"No projector, Classroom iMacs,  1 Classroom Dell, Printer",,,iMac,Mac,No,No,20,No,No
 6835,Keyes 408,Keyes,408,Lab/Seminar,Instructional Lab,,16,"No projector, 8 Classroom iMacs",,,iMac,Mac,No,No,9,No,No
-4,,Lorimer,Chapel,,,,,,,,,,,,,No,No
+4,,Lorimer,Chapel,,,,226,,,,,,,,,No,No
 6814,Lovejoy 100 (Kassman Auditorium),Lovejoy,100 (Kassman),Auditorium,Lecture Hall,Multi,118,"Projector, Microphone (adjustable, wireless)",Oppo Blu-ray,220274,Mac Mini,Both,Yes,No,,No,No
 6772,Lovejoy 102,Lovejoy,102,Active Learning,Active Learning Classroom,Languages,22,Projector,"Rolling cart, Projection Whiteboard",210334,iMac,Mac,Yes,Yes,,No,No
 6773,Lovejoy 103,Lovejoy,103,Active Learning,Active Learning Classroom,Languages,29,Projector,"Rolling cart, Projection Whiteboard",210429,iMac,Mac,Yes,Yes,,No,No
@@ -104,14 +104,14 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6791,Lovejoy 319,Lovejoy,319,Classroom,Seminar Classroom,Languages,24,Projector,,180137,Mac Mini,Mac,Yes,No,,No,No
 6792,Lovejoy 344,Lovejoy,344,Seminar,Seminar Classroom,Religious,14,Projector,Projection Whiteboard,220279,Mac Mini,Mac,Yes,No,,No,No
 6793,Lovejoy 400,Lovejoy,400,Computer Lab,Computer Lab,All,30,"Projector, 26 Classroom iMacs, 2 Printers",,210178,Mac Mini,Mac,No,No,26,No,No
-6796,Lovejoy 404,Lovejoy,404,Computer Lab,Computer Lab,Languages,,"Projector, 16 Classroom macs, Printer",,210819,Mac Mini,Mac,Yes,No,18,No,No
+6796,Lovejoy 404,Lovejoy,404,Computer Lab,Computer Lab,Languages,15,"Projector, 16 Classroom macs, Printer",,210819,Mac Mini,Mac,Yes,No,18,No,No
 6794,Lovejoy 423,Lovejoy,423,Seminar,Seminar Classroom,EastAs,10,Projector,,210260,Mac Mini,Mac,Yes,No,,No,No
 6795,Lovejoy 450,Lovejoy,450,Seminar,Seminar Classroom,Germ/Russ,10,Projector,,180141,Mac Mini,Mac,Yes,No,,No,No
-6797,Miller 008,Miller,8,Active Learning,Active Learning Classroom,Multi,,"Projector, 5 TVs, Doc Cam (Samsung)",,230250,iMac,Mac,Yes,Yes,,Yes,No
+6797,Miller 008,Miller,8,Active Learning,Active Learning Classroom,Multi,45,"Projector, 5 TVs, Doc Cam (Samsung)",,230250,iMac,Mac,Yes,Yes,,Yes,No
 6798,Miller 014,Miller,14,Classroom,Classroom,Multi,48,Projector,,200164,iMac,Mac,Yes,Yes,,No,No
 6799,Miller 034,Miller,34,Seminar,Seminar Classroom,Educ,16,Projector,,230236,iMac,Mac,Yes,No,,No,No
-5,Miller 104 (Davis Classroom),Miller,104,,Computer Classroom,,,"Projector, printer",,210714,Mac Mini,Mac,Yes,Yes,25,No,No
-10581,Miller 205,Miller,205,,Active Learning Classroom,,,Projector ,Projection whiteboard ,,Mac Mini,Mac,No,Yes,,Yes,Yes
+5,Miller 104 (Davis Classroom),Miller,104,,Computer Classroom,,25,"Projector, printer",,210714,Mac Mini,Mac,Yes,Yes,25,No,No
+10581,Miller 205,Miller,205,,Active Learning Classroom,,18,Projector ,Projection whiteboard ,,Mac Mini,Mac,No,Yes,,Yes,Yes
 6800,Miller 220,Miller,220,Seminar,Seminar Classroom,English,16,Projector,Projection Whiteboard,220264,Mac Mini,Mac,Yes,No,,No,No
 6801,Miller 241,Miller,241,Seminar,Seminar Classroom,WGS/Cinema,15,Projector,Oppo Blueray,210917,Mac Mini,Mac,Yes,Yes,,No,No
 6802,Miller 253,Miller,253,Seminar,Seminar Classroom,American/Cinema,15,"Projector, Surround System",Oppo bluray,210810,Mac Mini,Mac,Yes,Yes,,No,No
@@ -119,8 +119,8 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6804,Miller 319,Miller,319,Seminar,Seminar Classroom,Multi,20,Projector,,210928,Mac Mini,Mac,Yes,Yes,,No,No
 6836,Mudd 102,Mudd,102,Lab/Seminar,Instructional Lab,Geo,12,Projector,,,,,No,No,,No,No
 6837,Mudd 103,Mudd,103,Lab/Seminar,Instructional Lab,Geo,12,"Suspended Outlets , projector",,230240,iMac,Mac,No,Yes,,No,No
-6,Mudd 218,Mudd,218,,Instructional Lab,,,"Projector, Doc Cam, printer",,7490-220349,PC,Windows,Yes,No,,No,No
-7,Mudd 219,Mudd ,219,,Instructional Lab,,,Projector,,,,,Yes,No,,No,No
+6,Mudd 218,Mudd,218,,Instructional Lab,,25,"Projector, Doc Cam, printer",,7490-220349,PC,Windows,Yes,No,,No,No
+7,Mudd 219,Mudd ,219,,Instructional Lab,,12,Projector,,,,,Yes,No,,No,No
 6838,Mudd 221,Mudd,221,Lab/Seminar,Instructional Lab,Geo,12,"Projector, TV, Suspended Outlets","Project microscope view, Projection Whiteboard",23096,PC,Windows,No,Yes,,No,No
 6805,Mudd 311,Mudd,311,Classroom,Classroom,Physics/Astro,26,2 Projectors,"Eno projector, Projection Whiteboard",210783,PC,Windows,Yes,No,,No,No
 6839,Mudd 322,Mudd,322,Lab/Seminar,Instructional Lab,Geo,24,,,,,,,,,No,No
@@ -133,14 +133,14 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating,Tech
 6842,Olin 213,Olin,213,Lab/Seminar,Instructional Lab,Bio,18,"Projector, Printer ",13 Clasroom iMacs ,210844,Mac Mini,Mac,No,Yes,13,No,No
 6843,Olin 223,Olin,223,Lab/Seminar,Instructional Lab,Bio,18,"No instructor computer, Projector, Printer ","13 Clasroom iMac computers, 6 Clasrrom Dells",no computer ,,,No,Yes,,No,No
 6844,Olin 229,Olin,229,Lab/Seminar,Instructional Lab,Bio,16,"No instructor computer, Projector, 2 Printers(color & b/w), Epson 3170 photo","13 Classroom iMac, 3 Classroom Dells ",no computer,,,No,Yes,,No,No
-6807,Olin 234,Olin,234,Lab/Seminar,Instructional Lab, , ,Suspended Outlets,,,,,,,,No,No
+6807,Olin 234,Olin,234,Lab/Seminar,Instructional Lab, ,30,Suspended Outlets,,,,,,,,No,No
 6845,Olin 314,Olin,314,Lab/Seminar,Instructional Lab,Bio,16,"No instructor computer, Projector, Printer",12 Clasroom iMac ,no computer ,,,No,Yes,12,No,No
 6846,Olin 332,Olin,332,Lab/Seminar,Instructional Lab,Bio,24,"No instructor computer, Projector, Printer, Suspended Outlets",8 Classroom Dells,no computer ,,,No,No,8,No,No
 6808,Olin 335,Olin,335,Seminar,Seminar Classroom,Bio,14,"TV, Projector ",,200365,iMac,Mac,No,Yes,,Yes,Yes
 6847,Runnals 110,Runnals,110,Seminar,Seminar Classroom,Theatre/Dance,18,TV,DVD & VHS Player,,,,Yes,No,,No,No
 6848,Runnals 201,Runnals,201,Studio,Classroom,Dance,20,2 projector whiteboards ,,210850,Mac Mini,Mac,Yes,Yes,,No,No
 6809,Runnals 203,Runnals,203,Classroom,Classroom,TheatreDance/Art,24,"Projector, Printer",,200010,Mac Mini,Mac,Yes,No,,No,No
-6849,Runnals 206,Runnals,206,,Active Learning Classroom,,,4 TVs,,210821,Mac Mini,Mac,Yes,Yes,,No,No
+6849,Runnals 206,Runnals,206,,Active Learning Classroom,,24,4 TVs,,210821,Mac Mini,Mac,Yes,Yes,,No,No
 6850,Runnals Theater,Runnals,Theater,Theater,,Theatre/dance,250,,,no computer,,,,,,No,No
 6866,,,,,,,,,,,,,,,,,
 6861,,,,,,,,,,,,,,,,,
