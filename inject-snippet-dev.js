@@ -28,6 +28,21 @@ window.addEventListener("load", function () {
             //}
 
             let html = "";
+            html += '<p><strong>Information:</strong></p>';
+            html += '<ul>';
+            html += '<li>Room Element</li>';
+            html += '/ul>';
+            html += '<hr>';
+            html += '<p><strong>Features:</strong></p>';
+            html += '<ul>';
+            html += '<li>Room Element</li>';
+            html += '/ul>';
+            html += '<hr>';
+            html += '<p><strong>Equipment:</strong></p>';
+            html += '<ul>';
+            html += '<li>Room Element</li>';
+            html += '/ul>';
+            html += '<hr>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
                 if (value != null && value !== "") {
@@ -35,6 +50,14 @@ window.addEventListener("load", function () {
                 }
             }
 
+            html += '<center> \
+                        <div class="well" style="width: 75%">\
+                            <b>\
+                                <a href="https://www.colby.edu/acits/wp-content/uploads/sites/178/2017/08/Icon_telefoon.png">\
+                                <img alt="" class="alignnone wp-image-7085" height="32" src="https://www.colby.edu/acits/wp-content/uploads/sites/178/2017/08/Icon_telefoon.png" width="32">\
+                                </a> Return to the Classroom Catalog</b>\
+                                </div>\
+                    </center>';
             html += '<br>';
             html += '<h3>360 Image</strong></h3>';
             html += '<p><i>Click and drag to rotate</i></p>';
