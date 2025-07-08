@@ -32,6 +32,9 @@ window.addEventListener("load", function () {
             const equip = ["Technology/Equipment Additional Notes", "System", "Operating System", "PC CCID", "Number of Lab Computers"];
 
             let html = "";
+            html += '<a class="btn btn-default" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a>'
+            html += '<a class="btn btn-primary" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a>'
+            html += '<a class="btn btn-secondary" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a>'
             html += '<p><h3>Information:</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
