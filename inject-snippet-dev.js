@@ -32,32 +32,32 @@ window.addEventListener("load", function () {
             const equip = ["Technology/Equipment Additional Notes", "System", "Operating System", "PC CCID", "Number of Lab Computers"];
 
             let html = "";
-            html += '<p><strong>Information:</strong></p>';
+            html += '<p><h3>Information:</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
                 if (info.includes(labels[i]) && value != null && value !== "") {
-                    html += `<li><p><strong>${labels[i]}:</strong> ${value}</p></li>`;
+                    html += `<li><strong>${labels[i]}:</strong> ${value}</li>`;
                 }
             }
             html += '</ul>';
             html += '<hr>';
-            html += '<p><strong>Features:</strong></p>';
+            html += '<p><h3>Features:</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
                 if (feat.includes(labels[i]) && value != null && value !== "") {
-                    html += `<li><p><strong>${labels[i]}:</strong> ${value}</p></li>`;
+                    html += `<li><strong>${labels[i]}:</strong> ${value}</li>`;
                 }
             }
             html += '</ul>';
             html += '<hr>';
-            html += '<p><strong>Equipment:</strong></p>';
+            html += '<p><h3>Equipment:</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
                 if (equip.includes(labels[i]) && value != null && value !== "") {
-                    html += `<li><p><strong>${labels[i]}:</strong> ${value}</p></li>`;
+                    html += `<li><strong>${labels[i]}:</strong> ${value}</li>`;
                 }
             }
             html += '</ul>';
