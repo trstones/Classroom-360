@@ -27,28 +27,42 @@ window.addEventListener("load", function () {
             //    return;
             //}
 
+            const info = ["Classroom", "Room Type", "Seating"];
+            const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive"];
+            const equip = ["Technology/Equipment Additional Notes", "System", "Operating System", "PC CCID", "Number of Lab Computers"];
+
             let html = "";
             html += '<p><strong>Information:</strong></p>';
             html += '<ul>';
-            html += '<li>Room Element</li>';
+            for (let i = 0; i < labels.length; i++) {
+                const value = values[i];
+                if (info.includes(labels[i]) && value != null && value !== "") {
+                    html += `<li><p><strong>${labels[i]}:</strong> ${value}</p></li>`;
+                }
+            }
             html += '</ul>';
             html += '<hr>';
             html += '<p><strong>Features:</strong></p>';
             html += '<ul>';
-            html += '<li>Room Element</li>';
+            for (let i = 0; i < labels.length; i++) {
+                const value = values[i];
+                if (feat.includes(labels[i]) && value != null && value !== "") {
+                    html += `<li><p><strong>${labels[i]}:</strong> ${value}</p></li>`;
+                }
+            }
             html += '</ul>';
             html += '<hr>';
             html += '<p><strong>Equipment:</strong></p>';
             html += '<ul>';
-            html += '<li>Room Element</li>';
-            html += '</ul>';
-            html += '<hr>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
-                if (value != null && value !== "") {
-                    html += `<p><strong>${labels[i]}:</strong> ${value}</p>`;
+                if (equip.includes(labels[i]) && value != null && value !== "") {
+                    html += `<li><p><strong>${labels[i]}:</strong> ${value}</p></li>`;
                 }
             }
+            html += '</ul>';
+            html += '<hr>';
+            
 
             html += '<center> \
                         <div class="well" style="width: 75%">\
