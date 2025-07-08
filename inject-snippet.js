@@ -27,9 +27,9 @@ window.addEventListener("load", function () {
             //    return;
             //}
 
-            const info = ["Classroom", "Room Type", "Seating"];
-            const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive"];
-            const equip = ["Technology/Equipment Additional Notes", "System", "Operating System", "PC CCID", "Number of Lab Computers"];
+            const info = ["Classroom", "Room Type", "Seating Capacity"];
+            const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive (DVD/Blu-Ray)"];
+            const equip = ["Technology/Equipment Additional Notes", "Computer System", "Operating System", "PC CCID", "Number of Lab Computers"];
 
             let html = "";
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
