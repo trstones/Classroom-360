@@ -32,10 +32,8 @@ window.addEventListener("load", function () {
             const equip = ["Technology/Equipment Additional Notes", "System", "Operating System", "PC CCID", "Number of Lab Computers"];
 
             let html = "";
-            html += '<a class="btn btn-default" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a>'
-            html += '<a class="btn btn-primary" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a>'
-            html += '<a class="btn btn-secondary" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a>'
-            html += '<p><h3>Information:</h3></p>';
+            html += '<a class="btn btn-default btn-block" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a>'
+            html += '<p><h3>Information</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
@@ -45,7 +43,7 @@ window.addEventListener("load", function () {
             }
             html += '</ul>';
             html += '<hr>';
-            html += '<p><h3>Features:</h3></p>';
+            html += '<p><h3>Features</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
@@ -55,7 +53,7 @@ window.addEventListener("load", function () {
             }
             html += '</ul>';
             html += '<hr>';
-            html += '<p><h3>Equipment:</h3></p>';
+            html += '<p><h3>Equipment</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
@@ -66,16 +64,6 @@ window.addEventListener("load", function () {
             html += '</ul>';
             html += '<hr>';
             
-
-            html += '<center> \
-                        <div class="well" style="width: 75%">\
-                            <b>\
-                                <a href="https://www.colby.edu/acits/wp-content/uploads/sites/178/2017/08/Icon_telefoon.png">\
-                                <img alt="" class="alignnone wp-image-7085" height="32" src="https://www.colby.edu/acits/wp-content/uploads/sites/178/2017/08/Icon_telefoon.png" width="32">\
-                                </a> Return to the Classroom Catalog</b>\
-                                </div>\
-                    </center>';
-            html += '<br>';
             html += '<h3>360 Image</strong></h3>';
             html += '<p><i>Click and drag to rotate</i></p>';
 
