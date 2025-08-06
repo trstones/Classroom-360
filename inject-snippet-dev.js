@@ -16,11 +16,12 @@ window.addEventListener("load", function () {
             
             const labels = headerLine.split(',').map(h => h.trim());
             const values = parseCSVLine(dataLine);
+            const is_venue = false;
 
             excludeFields(labels, values, excludeList);
 
-            console.log("Labels:", labels);
-            console.log("Values:", values);
+            //console.log("Labels:", labels);
+            //console.log("Values:", values);
 
             //if (labels.length !== values.length) {
             //    snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
@@ -31,6 +32,15 @@ window.addEventListener("load", function () {
             const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive (DVD/Blu-Ray)"];
             const equip = ["Technology/Equipment Additional Notes", "Computer System", "Operating System", "PC CCID", "Number of Lab Computers"];
             const venue = ["Description", "Equipment", "Features", "Seating (Fixed/Open)", "Seating (capacity)", "Microphones"];
+            const venue_bool = ["Is Venue"]
+
+            for (let i = 0; i < labels.length; i++) {
+                const value = values[i];
+                if (is_venue.includes(labels[i]) && value != null && value !== "") {
+                    if labels[i] = "Yes" {
+                        is_venue = true;
+                }
+            }
             
             let html = "";
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
@@ -44,16 +54,20 @@ window.addEventListener("load", function () {
             }
             html += '</ul>';
             html += '<hr>';
-            html += '<p><h3>Venue Information</h3></p>';
-            html += '<ul>';
-            for (let i = 0; i < labels.length; i++) {
-                const value = values[i];
-                if (venue.includes(labels[i]) && value != null && value !== "") {
-                    html += `<li><strong>${labels[i]}:</strong> ${value}</li>`;
+
+            if (is_Venue = true) {    
+                html += '<p><h3>Venue Information</h3></p>';
+                html += '<ul>';
+                for (let i = 0; i < labels.length; i++) {
+                    const value = values[i];
+                    if (venue.includes(labels[i]) && value != null && value !== "") {
+                        html += `<li><strong>${labels[i]}:</strong> ${value}</li>`;
+                    }
                 }
+                html += '</ul>';
+                html += '<hr>';
             }
-            html += '</ul>';
-            html += '<hr>';
+                
             
             html += '<p><h3>Features</h3></p>';
             html += '<ul>';
@@ -65,6 +79,8 @@ window.addEventListener("load", function () {
             }
             html += '</ul>';
             html += '<hr>';
+
+                
             html += '<p><h3>Equipment</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
