@@ -19,8 +19,8 @@ window.addEventListener("load", function () {
 
             excludeFields(labels, values, excludeList);
 
-            //console.log("Labels:", labels);
-            //console.log("Values:", values);
+            console.log("Labels:", labels);
+            console.log("Values:", values);
 
             //if (labels.length !== values.length) {
             //    snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
