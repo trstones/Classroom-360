@@ -4,7 +4,7 @@ window.addEventListener("load", function () {
     fetch("https://trstones.github.io/Classroom-360/classroom-database-Aug6-2025.csv")
         .then(response => response.text())
         .then(csv => {
-            console.log("Rev: Aug6 A");
+            console.log("Rev: Aug6 B");
             const roomID = getRoomID();
             const excludeList = ["ID", "Building", "Room Number", "WD Room Type", "Department", "Phone in Room", "Photo Index", "Photo URL", "Photo 360 View"];
             //const excludeList = ["ID"]
@@ -27,8 +27,9 @@ window.addEventListener("load", function () {
             const dict = createDict(labels, values);
             console.log(dict);
 
-            const isVenueValue = dict["Is Venue"];
-            console.log(isVenueValue);
+            if (dict["Is Venue"] = "Yes") {
+                is_venue = true;
+            }
 
             //if (labels.length !== values.length) {
             //    snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
@@ -63,7 +64,7 @@ window.addEventListener("load", function () {
             html += '</ul>';
             html += '<hr>';
 
-            //if (is_venue = true) {    
+            if (is_venue = true) {    
                 html += '<p><h3>Venue Information</h3></p>';
                 html += '<ul>';
                 for (let i = 0; i < labels.length; i++) {
@@ -74,7 +75,7 @@ window.addEventListener("load", function () {
                 }
                 html += '</ul>';
                 html += '<hr>';
-            //}
+            }
                 
             
             html += '<p><h3>Features</h3></p>';
