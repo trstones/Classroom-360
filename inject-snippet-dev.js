@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
             const dict = createDict(labels, values);
             console.log(dict);
 
-            const isVenueValue = obj["Is Venue"];
+            const isVenueValue = dict["Is Venue"];
             console.log(isVenueValue);
 
             //if (labels.length !== values.length) {
