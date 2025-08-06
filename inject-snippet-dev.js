@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
             const dict = createDict(labels, values);
             console.log(dict);
 
-            if (dict["Is Venue"] = "Yes") {
+            if (dict["Is Venue"] == "Yes") {
                 is_venue = true;
             }
 
@@ -64,7 +64,7 @@ window.addEventListener("load", function () {
             html += '</ul>';
             html += '<hr>';
 
-            if (is_venue = true) {    
+            if (is_venue == true) {    
                 html += '<p><h3>Venue Information</h3></p>';
                 html += '<ul>';
                 for (let i = 0; i < labels.length; i++) {
