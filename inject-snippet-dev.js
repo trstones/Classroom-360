@@ -30,10 +30,11 @@ window.addEventListener("load", function () {
             const info = ["Classroom", "Room Type", "Seating Capacity"];
             const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive (DVD/Blu-Ray)"];
             const equip = ["Technology/Equipment Additional Notes", "Computer System", "Operating System", "PC CCID", "Number of Lab Computers"];
-
+            const venue = ["Description", "Equipment", "Features", "Seating (Fixed/Open)", "Seating (capacity)", "Microphones"]
+            
             let html = "";
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
-            html += '<p><h3>Information</h3></p>';
+            html += '<p><h3>General Information</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
@@ -43,6 +44,17 @@ window.addEventListener("load", function () {
             }
             html += '</ul>';
             html += '<hr>';
+            html += '<p><h3>Venue Information</h3></p>';
+            html += '<ul>';
+            for (let i = 0; i < labels.length; i++) {
+                const value = values[i];
+                if (venue.includes(labels[i]) && value != null && value !== "") {
+                    html += `<li><strong>${labels[i]}:</strong> ${value}</li>`;
+                }
+            }
+            html += '</ul>';
+            html += '<hr>';
+            
             html += '<p><h3>Features</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
