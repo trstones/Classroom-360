@@ -4,7 +4,6 @@ window.addEventListener("load", function () {
     fetch("https://trstones.github.io/Classroom-360/classroom-database-Aug6-2025.csv")
         .then(response => response.text())
         .then(csv => {
-            console.log("Rev: Aug6 C");
             const roomID = getRoomID();
             const excludeList = ["ID", "Building", "Room Number", "WD Room Type", "Department", "Phone in Room", "Photo Index", "Photo URL", "Photo 360 View"];
             //const excludeList = ["ID"]
@@ -21,11 +20,11 @@ window.addEventListener("load", function () {
 
             excludeFields(labels, values, excludeList);
 
-            console.log("Labels:", labels);
-            console.log("Values:", values);
+            //console.log("Labels:", labels);
+            //console.log("Values:", values);
 
             const dict = createDict(labels, values);
-            console.log(dict);
+            //console.log(dict);
 
             if (dict["Is Venue"] == "Yes") {
                 is_venue = true;
@@ -41,15 +40,8 @@ window.addEventListener("load", function () {
             const equip = ["Technology/Equipment Additional Notes", "Computer System", "Operating System", "PC CCID", "Number of Lab Computers"];
             const venue = ["Description", "Equipment", "Features", "Seating (Fixed/Open)", "Seating (capacity)", "Microphones"];
             const venue_bool = ["Is Venue"];
-
-            //for (let i = 0; i < labels.length; i++) {
-            //    const value = values[i];
-            //    if (is_venue.includes(labels[i]) && value != null && value !== "") {
-            //        if labels[i] = "Yes" {
-            //            is_venue = true;
-            //    }
-            //}
-            console.log("is_venue:", is_venue);
+            
+            //console.log("is_venue:", is_venue);
             
             let html = "";
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
