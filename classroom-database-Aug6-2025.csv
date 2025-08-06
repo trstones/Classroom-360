@@ -20,8 +20,7 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating Capa
 6738,Bixler 142,Bixler,142,Seminar,Classroom,Art/Music,10,,,,,,,,,No,No,,,,,,,,,
 6739,Bixler 150,Bixler,150,Classroom,Classroom,Music/Art,30,Projector,Oppo bluray,220270,Mac Mini,Mac,Yes,No,,No,No,,,,,,,,,
 6740,Bixler 154,Bixler,154,Classroom,Classroom,Art/Music/Cinema,38,"Projector,Doc Cam (Samsung)",Oppo bluray,220261,Mac Mini,Mac,Yes,No,,No,No,,,,,,,,,
-6811,Bixler 178 (Given),Bixler,178 (Given),Auditorium,Lecture Hall,Art/Music/Cinema,350,,,,,,,,,No,No,Yes,Given is a capacious auditorium with generous acoustics.,"Podium with mic, 2 microphones, Built in Mac mini, Projector
-","Main stage area, Built in power for devices, Built in video output",Fixed,350,2,,
+6811,Bixler 178 (Given),Bixler,178 (Given),Auditorium,Lecture Hall,Art/Music/Cinema,350,,,,,,,,,No,No,Yes,Given is a capacious auditorium with generous acoustics.,"Podium with mic, 2 microphones, Built in Mac mini, Projector","Main stage area, Built in power for devices, Built in video output",Fixed,350,2,,
 6824,Bixler 219,Bixler,219,Studio,Classroom,Music,30,,,,,,,,,No,No,,,,,,,,,
 6741,Bixler 226,Bixler,226,Classroom,Classroom,Music,25,Projector,,25200,Mac Mini,Mac,No,No,,No,No,,,,,,,,,
 2,,Bixler ,250,,Studio,,20,,,,,,,,,No,No,,,,,,,,,
@@ -41,15 +40,12 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating Capa
 6829,Davis 306,Davis,306,Class/Cluster,Classroom,Psych,16,"Projector, Classroom iMacs, Printer",,200253,PC,Windows,No,No,6,No,No,,,,,,,,,
 6750,Davis 307,Davis,307,Seminar,Classroom,Psych,20,"Projector, Eno board",Oppo BluRay,9020-023024,PC,Windows,Yes,No,,No,No,,,,,,,,,
 6751,Davis 308,Davis,308,Computer Lab,Computer Classroom,CompSci/Math,32,"Projector, 35 Classroom iMacs, Printer",Oppo BluRay,190372,iMac,Mac,Yes,No,35,No,No,,,,,,,,,
-6752,Diamond 122,Diamond,122,Classroom,Classroom,Gov/Econ,60,"Projector, Acoustic Panels, Microphone (adjustable, wireless)",,5090-210787,PC,Windows,Yes,Yes,,No,No,Yes,"The “well” layout makes this large classroom well-suited to addresses from the lectern or from seats at the front of the room, and particularly benefits Q & A–style interaction.","4 microphones, Podium with mic, Built in Windows PC, Projector, Solstice",HDMI input,Fixed,60,4,,
+6752,Diamond 122,Diamond,122,Classroom,Classroom,Gov/Econ,60,"Projector, Acoustic Panels, Microphone (adjustable, wireless)",,5090-210787,PC,Windows,Yes,Yes,,No,No,Yes,"The √íwell√ì layout makes this large classroom well-suited to addresses from the lectern or from seats at the front of the room, and particularly benefits Q & A√êstyle interaction.","4 microphones, Podium with mic, Built in Windows PC, Projector, Solstice",HDMI input,Fixed,60,4,,
 6753,Diamond 123,Diamond,123,ALC,Classroom,Goldfarb,26,"Projector, 4 TVs",,210171,Mac Mini,Mac,Yes,Yes,,No,No,,,,,,,,,
 6754,Diamond 141,Diamond,141,Classroom,Classroom,Gov/Econ,50,"Projector, Acoustic Panels ",,7050-180031,PC,Windows,Yes,Yes,,No,No,,,,,,,,,
-6812,Diamond 142 (Ostrove),Diamond,142 (Ostrove),Auditorium,Lecture Hall,Gov/Econ,182,"3 Projectors, Acoustic Panels, Microphone (adjustable, wireless)",Oppo BluRay,210920,Mac Mini,Both,Yes,Yes,,Yes,No,Yes,Ostrove is a popular campus gathering space well suited to panel discussions and lectures.,"8 microphones, Podium with mic, Built in Mac mini, 1 main projection screen and 2 side projections","Main stage area, Built in power for devices, USB-C and HDMI input
-",Fixed,182,8,,
+6812,Diamond 142 (Ostrove),Diamond,142 (Ostrove),Auditorium,Lecture Hall,Gov/Econ,182,"3 Projectors, Acoustic Panels, Microphone (adjustable, wireless)",Oppo BluRay,210920,Mac Mini,Both,Yes,Yes,,Yes,No,Yes,Ostrove is a popular campus gathering space well suited to panel discussions and lectures.,"8 microphones, Podium with mic, Built in Mac mini, 1 main projection screen and 2 side projections","Main stage area, Built in power for devices, USB-C and HDMI input",Fixed,182,8,,
 6755,Diamond 145,Diamond,145,Classroom,Classroom,Gov/Econ,40,"Projector, Acoustic Panels",,5090-210802,PC,Windows,Yes,Yes,,No,No,,,,,,,,,
-3,Diamond 146,Diamond,146,Conference,Seminar Classroom,,20,Projector,,210898,Mac Mini,Mac,Yes,No,,,,Yes,"Diamond 146 is a comfortable, well-appointed conference room with built-in Zoom capability.","Built in Mac mini, Projector, Built in video conferencing
-","Built in power for devices, HDMI input
-",Fixed,20,0,,
+3,Diamond 146,Diamond,146,Conference,Seminar Classroom,,20,Projector,,210898,Mac Mini,Mac,Yes,No,,,,Yes,"Diamond 146 is a comfortable, well-appointed conference room with built-in Zoom capability.","Built in Mac mini, Projector, Built in video conferencing","Built in power for devices, HDMI input",Fixed,20,0,,
 6756,Diamond 153,Diamond,153,Classroom,Classroom,Gov/Econ,40,"Projector, Acoustic panels",,7050-180026,PC,Windows,Yes,Yes,,No,No,,,,,,,,,
 6757,Diamond 221,Diamond,221,Seminar,Seminar Classroom,Soc,20,Projector,,180298,iMac,Mac,Yes,Yes,,No,No,,,,,,,,,
 6758,Diamond 222,Diamond,222,Computer Lab,Computer Classroom,GIS,16,"Projector, B/W Printer, Color Printer, Scanner",Height adjustable standing desk,5720-180446,PC,Windows,Yes,Yes,16,No,No,,,,,,,,,
@@ -63,19 +59,13 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating Capa
 6766,Diamond 342,Diamond,342,grpwork,Seminar Classroom,(Classroom),24,Projector ,,7050-180020,PC,Windows,Yes,Yes,,No,No,,,,,,,,,
 6767,Diamond 343,Diamond,343,Seminar,Seminar Classroom,Gov,20,Projector,,7050-180023,PC,Windows,Yes,Yes,,No,No,,,,,,,,,
 6768,Diamond 344,Diamond,344,grpwork,Seminar Classroom,(Classroom),24,"Projector, Acoustic panels ",,210813,Mac Mini,Mac,Yes,Yes,,Yes,No,,,,,,,,,
-11002,Gordon 110 (Studio 1),Gordon,110,Studio,Studio,,25,Projector,,,,,,,,Yes,No,Yes,,"4 microphones, Projector
-","Large modular space, HDMI input
-",Fixed,161,4,,
+11002,Gordon 110 (Studio 1),Gordon,110,Studio,Studio,,25,Projector,,,,,,,,Yes,No,Yes,,"4 microphones, Projector","Large modular space, HDMI input",Fixed,161,4,,
 11003,Gordon 120 (Arts Incubator),Gordon,120,Computer Lab/Seminar,Computer Classroom,,29,"Projector, various synthesizers, 2 3D printers, printer, postscript printer, TV, Rokit speakers, dual monitor lab computers ",,230184,Mac Mini,Mac,No,Yes,16,Yes,No,,,,,,,,,
-11004,Gordon 130 (Studio 2),Gordon,130,Studio,Studio,,328,,,,,,,,,Yes,No,Yes,,"4 microphones
-Projector","Large modular space, HDMI input
-",Fixed,165,4,,
+11004,Gordon 130 (Studio 2),Gordon,130,Studio,Studio,,328,,,,,,,,,Yes,No,Yes,,"4 microphonesProjector","Large modular space, HDMI input",Fixed,165,4,,
 11005,Gordon 140 (Performance Hall),Gordon,140,Auditorium,Lecture Hall,,25,,,,,,,,,Yes,No,Yes,The Performance Hall is a jewel. The immersive room is excellent for all forms of live music and performance.,"4 microphones, Projector",HDMI input,Fixed,302,4,,
 11006,Gordon 180 (Green Room),Gordon,180,Classroom,Classroom,,30,Projector,,,,,No,Yes,,Yes,No,,,,,,,,,
 11007,Gordon 190 (Scene Shop),Gordon,190,Lab/Seminar,Instructional Lab,,4,,,,,,,,,No,No,,,,,,,,,
-11008,Gordon 220 (Studio 3),Gordon,220,Studio,Studio,,16,,,,,,,,,Yes,No,Yes,,"4 microphones, Projector
-","Large modular space, HDMI input
-",Fixed,161,4,,
+11008,Gordon 220 (Studio 3),Gordon,220,Studio,Studio,,16,,,,,,,,,Yes,No,Yes,,"4 microphones, Projector","Large modular space, HDMI input",Fixed,161,4,,
 11009,Gordon 270,Gordon,270,Seminar,Seminar Classroom,,12,"Projector, acoustic panels",,,,,No,Yes,,No,No,,,,,,,,,
 11010,Gordon 280 (Rehearsal Room),Gordon,280,Studio,Studio,,12,,,,,,No,Yes,,Yes,No,,,,,,,,,
 11011,Gordon G10 (Film Screening),Gordon,G10,Auditorium,Lecture Hall,,52,"Projector, film screen",,,,,Yes,Yes,,No,No,,,,,,,,,
@@ -157,9 +147,9 @@ Projector","Large modular space, HDMI input
 6861,,,,,,,,,,,,,,,,,,,,,,,,,,
 6860,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Cotter Union 120 (Pulver Pavillion),Cotter Union,120,Pulver Pavillion,,,113,,,,,,,,,,,Yes,Cotter Union foot traffic makes this a very visible location; amplified sound is clearly audible throughout the public area (including the Spa).,"4 microphones, iPad for music",Large open space,Fixed,113,4,,
-,Cotter Union 126,Cotter Union,126,Silberman Lounge,,,50,,,,,,,,,,,Yes,Small stage and 50-seat capacity make this a good choice for “in-between”-sized events.,"2 microphones, Projector","Large modular space, HDMI input, Bluetooth adapter
+,Cotter Union 126,Cotter Union,126,Silberman Lounge,,,50,,,,,,,,,,,Yes,Small stage and 50-seat capacity make this a good choice for √íin-between√ì-sized events.,"2 microphones, Projector","Large modular space, HDMI input, Bluetooth adapter
 ",Fixed,50,2,,
-,Cotter Union 155,Cotter Union,155,Page Commons,,,500,,,,,,,,,,,Yes,"One of a handful of large indoor venues on campus. Flexible structure means the room’s A/V can be arranged in several combinations, for lectures, live music, or to accommodate livestreaming / Zoom.","4 microphones, Podium with mic, Built in Mac mini, Built in Windows PC, Projector
+,Cotter Union 155,Cotter Union,155,Page Commons,,,500,,,,,,,,,,,Yes,"One of a handful of large indoor venues on campus. Flexible structure means the room√ïs A/V can be arranged in several combinations, for lectures, live music, or to accommodate livestreaming / Zoom.","4 microphones, Podium with mic, Built in Mac mini, Built in Windows PC, Projector
 ","Main stage area, HDMI input, Mezzanine/box seating
 ",Fixed,500,4,,
 ,Dana 002,Dana,2,,,,34,,,,,,,,,,,Yes,"Mid-sized room features conventional projection-plus-sound, with a large screen. Tables can be arranged as a single large conference table, or as classroom-style rows all facing front.","2 microphones, Projector",HDMI input,Fixed,34,2,,
@@ -172,13 +162,13 @@ Projector","Large modular space, HDMI input
 ",Fixed,6,0,,
 ,Grossman 209/210,Davis Connects,209/210,All,,,42,,,,,,,,,,,Yes,"A flexible space that can be arranged in multiple layouts to accommodate many uses.
 Modular furniture and extensible technology make this room a good meeting for Zoom conferencing, large-screen presentations, and medium to large meetings.","2 microphones, Built in Mac mini, Projector","HDMI input, Modular room configuration",Fixed,42,2,,
-,Lorimer Chapel 107,Lorimer Chapel,107,,,,600,,,,,,,,,,,Yes,"One of the largest venues on campus, Lorimer’s formal atmosphere and high ceiling lend it grandeur. Pews can be moved to accommodate instruments at the front of the seating area. One of few campus rooms with no installed projection.","2 microphones, Podium with mic
+,Lorimer Chapel 107,Lorimer Chapel,107,,,,600,,,,,,,,,,,Yes,"One of the largest venues on campus, Lorimer√ïs formal atmosphere and high ceiling lend it grandeur. Pews can be moved to accommodate instruments at the front of the seating area. One of few campus rooms with no installed projection.","2 microphones, Podium with mic
 ",Large space,Fixed,600,2,,
 ,Mary Low 005,Mary Low Coffee House,5,Coffee house,,,32,,,,,,,,,,,Yes,,Projector,HDMI input,Fixed,32,0,,
 ,Roberts Dining Hall,Roberts,,Dining Hall,,,275,,,,,,,,,,,Yes,"Roberts Dining Hall has a distributed sound system, with installed wireless and wired microphones. Amplified sound is audible throughout the open seating area.","2 microphones, Projector",Large Space,Fixed,275,2,,
 ,Roberts 034,Roberts,34,Private Conference Room,,,20,,,,,,,,,,,Yes,A mid-sized private dining room appropriate for a meeting or seated presentation.,Wall mounted monitor,HDMI input,Fixed,20,0,,
 ,Roberts 111,Roberts,111,Smith/Hurd/Robins,,,100,,,,,,,,,,,Yes,"The Smith, Robins, and Hurd rooms can be combined in different configurations. Each contains in-room projection and sound, and allows for the connection of microphones.",Projector,"Large modular space, HDMI input",Fixed,100,0,,
-,SSWAC 104,SSWAC,104,Parker Reed,,,130,,,,,,,,,,,Yes,Parker-Reed is a handsome ballroom whose appeal is steeped in its natural light and view of the campus quad. The room’s furniture and technology can be configured to create several types of user experience.,"4 microphones, Podium with mic, Built in Mac mini, Projector, Solstice
+,SSWAC 104,SSWAC,104,Parker Reed,,,130,,,,,,,,,,,Yes,Parker-Reed is a handsome ballroom whose appeal is steeped in its natural light and view of the campus quad. The room√ïs furniture and technology can be configured to create several types of user experience.,"4 microphones, Podium with mic, Built in Mac mini, Projector, Solstice
 ","Large modular space, HDMI input",Fixed,130,4,,
 ,SSWAC 106,SSWAC,106,Marchetti,,,20,,,,,,,,,,,Yes,This good-sized conference room is well-suited to a medium-to-large meeting and can easily accommodate tables for food service.,Projector,HDMI input,Fixed,20,0,,
 ,SSWAC 202,SSWAC,202,Aldrich,,,6,,,,,,,,,,,Yes,This small conference room has built-in one-touch Zoom capacity.,"Wall mounted monitor, Built in Mac mini, PTZ camera
@@ -1016,4 +1006,5 @@ Modular furniture and extensible technology make this room a good meeting for Zo
 ,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,
+
 ,,,,,,,,,,,,,,,,,,,,,,,,,,
