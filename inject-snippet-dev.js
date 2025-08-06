@@ -32,7 +32,7 @@ window.addEventListener("load", function () {
             const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive (DVD/Blu-Ray)"];
             const equip = ["Technology/Equipment Additional Notes", "Computer System", "Operating System", "PC CCID", "Number of Lab Computers"];
             const venue = ["Description", "Equipment", "Features", "Seating (Fixed/Open)", "Seating (capacity)", "Microphones"];
-            const venue_bool = ["Is Venue"]
+            const venue_bool = ["Is Venue"];
 
             for (let i = 0; i < labels.length; i++) {
                 const value = values[i];
