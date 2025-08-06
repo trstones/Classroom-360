@@ -34,13 +34,13 @@ window.addEventListener("load", function () {
             const venue = ["Description", "Equipment", "Features", "Seating (Fixed/Open)", "Seating (capacity)", "Microphones"];
             const venue_bool = ["Is Venue"];
 
-            for (let i = 0; i < labels.length; i++) {
-                const value = values[i];
-                if (is_venue.includes(labels[i]) && value != null && value !== "") {
-                    if labels[i] = "Yes" {
-                        is_venue = true;
-                }
-            }
+            //for (let i = 0; i < labels.length; i++) {
+            //    const value = values[i];
+            //    if (is_venue.includes(labels[i]) && value != null && value !== "") {
+            //        if labels[i] = "Yes" {
+            //            is_venue = true;
+            //    }
+            //}
             console.log("is_venue:", is_venue);
             
             let html = "";
