@@ -81,8 +81,7 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating Capa
 6834,Keyes 405,Keyes,405,Lab/Seminar,Instructional Lab,Chem,25,"No projector, Classroom iMacs,  1 Classroom Dell, Printer",,,iMac,Mac,No,No,20,No,No,,,,,,,
 6835,Keyes 408,Keyes,408,Lab/Seminar,Instructional Lab,,16,"No projector, 8 Classroom iMacs",,,iMac,Mac,No,No,9,No,No,,,,,,,
 4,,Lorimer,Chapel,,,,226,,,,,,,,,No,No,,,,,,,
-6814,Lovejoy 100 (Kassman Auditorium),Lovejoy,100 (Kassman),Auditorium,Lecture Hall,Multi,118,"Projector, Microphone (adjustable, wireless)",Oppo Blu-ray,220274,Mac Mini,Both,Yes,No,,No,No,Yes,A comfortable auditorium with conventional projection.,"2 microphones, Podium with mic, Built in Mac mini, Projector
-",HDMI input,Fixed,117,2
+6814,Lovejoy 100 (Kassman Auditorium),Lovejoy,100 (Kassman),Auditorium,Lecture Hall,Multi,118,"Projector, Microphone (adjustable, wireless)",Oppo Blu-ray,220274,Mac Mini,Both,Yes,No,,No,No,Yes,A comfortable auditorium with conventional projection.,"2 microphones, Podium with mic, Built in Mac mini, Projector",HDMI input,Fixed,117,2
 6772,Lovejoy 102,Lovejoy,102,Active Learning,Active Learning Classroom,Languages,22,Projector,"Rolling cart, Projection Whiteboard",210334,iMac,Mac,Yes,Yes,,No,No,,,,,,,
 6773,Lovejoy 103,Lovejoy,103,Active Learning,Active Learning Classroom,Languages,29,Projector,"Rolling cart, Projection Whiteboard",210429,iMac,Mac,Yes,Yes,,No,No,,,,,,,
 6774,Lovejoy 119,Lovejoy,119,Active Learning,Active Learning Classroom,Languages,40,2 Projectors,Projection Whiteboard,210410,iMac,Mac,Yes,Yes,,No,No,,,,,,,
@@ -147,30 +146,22 @@ ID,Classroom,Building,Room Number,Room Type,WD Room Type,Department,Seating Capa
 6861,,,,,,,,,,,,,,,,,,,,,,,,
 6860,,,,,,,,,,,,,,,,,,,,,,,,
 9,Cotter Union 120 (Pulver Pavillion),Cotter Union,120,Pulver Pavillion,Venue,,113,,,,,,,,,,,Yes,Cotter Union foot traffic makes this a very visible location; amplified sound is clearly audible throughout the public area (including the Spa).,"4 microphones, iPad for music",Large open space,Fixed,113,4
-10,Cotter Union 126,Cotter Union,126,Silberman Lounge,Venue,,50,,,,,,,,,,,Yes,Small stage and 50-seat capacity make this a good choice for Òin-betweenÓ-sized events.,"2 microphones, Projector","Large modular space, HDMI input, Bluetooth adapter
-",Fixed,50,2
-11,Cotter Union 155,Cotter Union,155,Page Commons,Venue,,500,,,,,,,,,,,Yes,"One of a handful of large indoor venues on campus. Flexible structure means the roomÕs A/V can be arranged in several combinations, for lectures, live music, or to accommodate livestreaming / Zoom.","4 microphones, Podium with mic, Built in Mac mini, Built in Windows PC, Projector
-","Main stage area, HDMI input, Mezzanine/box seating
-",Fixed,500,4
+10,Cotter Union 126,Cotter Union,126,Silberman Lounge,Venue,,50,,,,,,,,,,,Yes,Small stage and 50-seat capacity make this a good choice for Òin-betweenÓ-sized events.,"2 microphones, Projector","Large modular space, HDMI input, Bluetooth adapter",Fixed,50,2
+11,Cotter Union 155,Cotter Union,155,Page Commons,Venue,,500,,,,,,,,,,,Yes,"One of a handful of large indoor venues on campus. Flexible structure means the roomÕs A/V can be arranged in several combinations, for lectures, live music, or to accommodate livestreaming / Zoom.","4 microphones, Podium with mic, Built in Mac mini, Built in Windows PC, Projector","Main stage area, HDMI input, Mezzanine/box seating",Fixed,500,4
 12,Dana 002,Dana,2,,Venue,,34,,,,,,,,,,,Yes,"Mid-sized room features conventional projection-plus-sound, with a large screen. Tables can be arranged as a single large conference table, or as classroom-style rows all facing front.","2 microphones, Projector",HDMI input,Fixed,34,2
 13,Dana 028B,Dana,028B,Dining Hall,Venue,,305,,,,,,,,,,,Yes,"Dana Dining Hall has a distributed sound system, with installed wireless and wired microphones. Amplified sound is audible throughout the open seating area.","2 microphones, Projector","Large space, 305 seating capacity, Handicap accessibility",Fixed,305,2
 14,Dana 046,Dana,46,Bullock,Venue,,12,,,,,,,,,,,Yes,"Bullock is a small, comfortable, private dining room appropriate for a meeting or seated presentation.",Wall mounted monitor,HDMI input,Fixed,12,0
 15,Dana 044,Dana,44,Camp,Venue,,15,,,,,,,,,,,Yes,"Camp is a small, comfortable, private dining room appropriate for a meeting or seated presentation.",Wall mounted monitor,HDMI input,Fixed,15,0
 16,Foss 024,Foss,24,Private Conference room,Venue,,20,,,,,,,,,,,Yes,A mid-sized private dining room appropriate for a meeting or a presentation.,Wall mounted monitor,HDMI input,Fixed,20,0
 17,Foss 039,Foss,39,Dining Hall,Venue,,300,,,,,,,,,,,Yes,"Foss Dining Hall has a distributed sound system, with installed wireless and wired microphones. Amplified sound is audible throughout the open seating area.",2 microphones,Large Space,Fixed,300,2
-18,Grossman 208,Davis Connects,208,Conference room,Venue,,6,,,,,,,,,,,Yes,Small conference room with high-quality built-in dual-screen Zoom Room.,Built in Mac mini,"2 wall mounted monitors, HDMI input
-",Fixed,6,0
-19,Grossman 209/210,Davis Connects,209/210,All,Venue,,42,,,,,,,,,,,Yes,"A flexible space that can be arranged in multiple layouts to accommodate many uses.
-Modular furniture and extensible technology make this room a good meeting for Zoom conferencing, large-screen presentations, and medium to large meetings.","2 microphones, Built in Mac mini, Projector","HDMI input, Modular room configuration",Fixed,42,2
-20,Lorimer Chapel 107,Lorimer Chapel,107,,Venue,,600,,,,,,,,,,,Yes,"One of the largest venues on campus, LorimerÕs formal atmosphere and high ceiling lend it grandeur. Pews can be moved to accommodate instruments at the front of the seating area. One of few campus rooms with no installed projection.","2 microphones, Podium with mic
-",Large space,Fixed,600,2
+18,Grossman 208,Davis Connects,208,Conference room,Venue,,6,,,,,,,,,,,Yes,Small conference room with high-quality built-in dual-screen Zoom Room.,Built in Mac mini,"2 wall mounted monitors, HDMI input",Fixed,6,0
+19,Grossman 209/210,Davis Connects,209/210,All,Venue,,42,,,,,,,,,,,Yes,"A flexible space that can be arranged in multiple layouts to accommodate many uses. Modular furniture and extensible technology make this room a good meeting for Zoom conferencing, large-screen presentations, and medium to large meetings.","2 microphones, Built in Mac mini, Projector","HDMI input, Modular room configuration",Fixed,42,2
+20,Lorimer Chapel 107,Lorimer Chapel,107,,Venue,,600,,,,,,,,,,,Yes,"One of the largest venues on campus, LorimerÕs formal atmosphere and high ceiling lend it grandeur. Pews can be moved to accommodate instruments at the front of the seating area. One of few campus rooms with no installed projection.","2 microphones, Podium with mic",Large space,Fixed,600,2
 21,Mary Low 005,Mary Low Coffee House,5,Coffee house,Venue,,32,,,,,,,,,,,Yes,,Projector,HDMI input,Fixed,32,0
 22,Roberts Dining Hall,Roberts,,Dining Hall,Venue,,275,,,,,,,,,,,Yes,"Roberts Dining Hall has a distributed sound system, with installed wireless and wired microphones. Amplified sound is audible throughout the open seating area.","2 microphones, Projector",Large Space,Fixed,275,2
 23,Roberts 034,Roberts,34,Private Conference Room,Venue,,20,,,,,,,,,,,Yes,A mid-sized private dining room appropriate for a meeting or seated presentation.,Wall mounted monitor,HDMI input,Fixed,20,0
 24,Roberts 111,Roberts,111,Smith/Hurd/Robins,Venue,,100,,,,,,,,,,,Yes,"The Smith, Robins, and Hurd rooms can be combined in different configurations. Each contains in-room projection and sound, and allows for the connection of microphones.",Projector,"Large modular space, HDMI input",Fixed,100,0
-25,SSWAC 104,SSWAC,104,Parker Reed,Venue,,130,,,,,,,,,,,Yes,Parker-Reed is a handsome ballroom whose appeal is steeped in its natural light and view of the campus quad. The roomÕs furniture and technology can be configured to create several types of user experience.,"4 microphones, Podium with mic, Built in Mac mini, Projector, Solstice
-","Large modular space, HDMI input",Fixed,130,4
+25,SSWAC 104,SSWAC,104,Parker Reed,Venue,,130,,,,,,,,,,,Yes,Parker-Reed is a handsome ballroom whose appeal is steeped in its natural light and view of the campus quad. The roomÕs furniture and technology can be configured to create several types of user experience.,"4 microphones, Podium with mic, Built in Mac mini, Projector, Solstice","Large modular space, HDMI input",Fixed,130,4
 26,SSWAC 106,SSWAC,106,Marchetti,Venue,,20,,,,,,,,,,,Yes,This good-sized conference room is well-suited to a medium-to-large meeting and can easily accommodate tables for food service.,Projector,HDMI input,Fixed,20,0
-27,SSWAC 202,SSWAC,202,Aldrich,Venue,,6,,,,,,,,,,,Yes,This small conference room has built-in one-touch Zoom capacity.,"Wall mounted monitor, Built in Mac mini, PTZ camera
-",HDMI input,Fixed,6,0
+27,SSWAC 202,SSWAC,202,Aldrich,Venue,,6,,,,,,,,,,,Yes,This small conference room has built-in one-touch Zoom capacity.,"Wall mounted monitor, Built in Mac mini, PTZ camera",HDMI input,Fixed,6,0
 28,SSWAC 203,SSWAC,203,Carol Johnson,Venue,,130,,,,,,,,,,,Yes,This small conference room has built-in one-touch Zoom capacity.,"Built in Mac mini, Wall mounted monitor, PTZ camera",HDMI input,Fixed,130,0
