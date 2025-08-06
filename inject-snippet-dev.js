@@ -20,8 +20,8 @@ window.addEventListener("load", function () {
 
             excludeFields(labels, values, excludeList);
 
-            //console.log("Labels:", labels);
-            //console.log("Values:", values);
+            console.log("Labels:", labels);
+            console.log("Values:", values);
 
             //if (labels.length !== values.length) {
             //    snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
@@ -41,6 +41,7 @@ window.addEventListener("load", function () {
                         is_venue = true;
                 }
             }
+            console.log("is_venue:", is_venue);
             
             let html = "";
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
@@ -55,7 +56,7 @@ window.addEventListener("load", function () {
             html += '</ul>';
             html += '<hr>';
 
-            if (is_Venue = true) {    
+            if (is_venue = true) {    
                 html += '<p><h3>Venue Information</h3></p>';
                 html += '<ul>';
                 for (let i = 0; i < labels.length; i++) {
