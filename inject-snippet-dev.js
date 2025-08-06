@@ -4,7 +4,7 @@ window.addEventListener("load", function () {
     fetch("https://trstones.github.io/Classroom-360/classroom-database-Aug6-2025.csv")
         .then(response => response.text())
         .then(csv => {
-            console.log("Rev: Aug6 B");
+            console.log("Rev: Aug6 C");
             const roomID = getRoomID();
             const excludeList = ["ID", "Building", "Room Number", "WD Room Type", "Department", "Phone in Room", "Photo Index", "Photo URL", "Photo 360 View"];
             //const excludeList = ["ID"]
@@ -17,7 +17,7 @@ window.addEventListener("load", function () {
             
             const labels = headerLine.split(',').map(h => h.trim());
             const values = parseCSVLine(dataLine);
-            const is_venue = false;
+            let is_venue = false;
 
             excludeFields(labels, values, excludeList);
 
