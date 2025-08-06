@@ -4,6 +4,7 @@ window.addEventListener("load", function () {
     fetch("https://trstones.github.io/Classroom-360/classroom-database-Aug6-2025.csv")
         .then(response => response.text())
         .then(csv => {
+            console.log("Rev: Aug6 A");
             const roomID = getRoomID();
             const excludeList = ["ID", "Building", "Room Number", "WD Room Type", "Department", "Phone in Room", "Photo Index", "Photo URL", "Photo 360 View"];
             //const excludeList = ["ID"]
@@ -22,6 +23,12 @@ window.addEventListener("load", function () {
 
             console.log("Labels:", labels);
             console.log("Values:", values);
+
+            const dict = createDict(labels, values);
+            console.log(dict);
+
+            const isVenueValue = obj["Is Venue"];
+            console.log(isVenueValue);
 
             //if (labels.length !== values.length) {
             //    snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
@@ -123,6 +130,14 @@ function excludeFields(headers, values, exclude) {
             values.splice(i, 1);
         }
     }
+}
+
+function createDict(labels, values) {
+  const result = {};
+  for (let i = 0; i < labels.length; i++) {
+    result[labels[i]] = values[i];
+  }
+  return result;
 }
 
 function parseCSVLine(line) {
