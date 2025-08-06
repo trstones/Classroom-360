@@ -19,17 +19,17 @@ window.addEventListener("load", function () {
 
             excludeFields(labels, values, excludeList);
 
-            console.log("Labels:", labels);
-            console.log("Values:", values);
+            //console.log("Labels:", labels);
+            //console.log("Values:", values);
 
             //if (labels.length !== values.length) {
             //    snippetDiv.innerHTML = "<p>Error: CSV column mismatch.</p>";
             //    return;
             //}
 
-            const info = ["Classroom", "Room Type", "Seating"];
-            const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive"];
-            const equip = ["Technology/Equipment Additional Notes", "System", "Operating System", "PC CCID", "Number of Lab Computers"];
+            const info = ["Classroom", "Room Type", "Seating Capacity"];
+            const feat = ["Technology Details", "Wireless Projection (Solstice)", "Record / Stream", "Video Conferencing (Zoom Room)", "Optical Drive (DVD/Blu-Ray)"];
+            const equip = ["Technology/Equipment Additional Notes", "Computer System", "Operating System", "PC CCID", "Number of Lab Computers"];
 
             let html = "";
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
@@ -127,26 +127,3 @@ function parseCSVLine(line) {
   
   return result;
 }
-
-/**
-function parseCSVLine(line) {
-    console.log("Parse line (input):", line);
-    const regex = /(".*?"|[^",]*)(?:,|$)/g;
-    const matches = [];
-    let match;
-
-    while ((match = regex.exec(line)) !== null) {
-        let field = match[1];
-
-        if (field.startsWith('"') && field.endsWith('"')) {
-             field = field.substring(1, field.length - 1);
-             field = field.replace(/""/g, '"');
-         }
-
-        matches.push(field.trim());
-    }
-    console.log("Parse line (output):", matches);
-    return matches;
-}
-*/
-
