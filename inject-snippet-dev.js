@@ -56,7 +56,7 @@ window.addEventListener("load", function () {
             html += '</ul>';
             html += '<hr>';
 
-            if (is_venue = true) {    
+            //if (is_venue = true) {    
                 html += '<p><h3>Venue Information</h3></p>';
                 html += '<ul>';
                 for (let i = 0; i < labels.length; i++) {
@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
                 }
                 html += '</ul>';
                 html += '<hr>';
-            }
+            //}
                 
             
             html += '<p><h3>Features</h3></p>';
