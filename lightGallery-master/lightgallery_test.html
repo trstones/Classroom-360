@@ -1,0 +1,32 @@
+<head>
+    <link type="text/css" rel="stylesheet" href="css/lightgallery-bundle.css" />
+</head>
+
+<body>
+    ....
+
+    <script src="js/lightgallery.umd.js"></script>
+
+    <!-- lightgallery plugins -->
+    <script src="js/plugins/lg-thumbnail.umd.js"></script>
+    <script src="js/plugins/lg-zoom.umd.js"></script>
+</body>
+
+<div id="lightgallery">
+    <a href="img/img1.jpg" data-lg-size="1600-2400">
+        <img alt="img1" src="https://images.pexels.com/photos/33509169/pexels-photo-33509169.jpeg" />
+    </a>
+    <a href="img/img2.jpg" data-lg-size="1024-800">
+        <img alt="img2" src="https://images.pexels.com/photos/33488327/pexels-photo-33488327.jpeg" />
+    </a>
+    ...
+</div>
+
+<script type="text/javascript">
+    lightGallery(document.getElementById('lightgallery'), {
+        plugins: [lgZoom, lgThumbnail],
+        licenseKey: 'your_license_key',
+        speed: 500,
+        // ... other settings
+    });
+</script>
