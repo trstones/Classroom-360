@@ -46,6 +46,7 @@ window.addEventListener("load", function () {
             let html = "";
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
             if (dict["Is Venue"] == "Yes") {
+                html += '<br>';
                 html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55467" role="button">Return to Venue Lookup</a></center>'
             }
             html += '<p><h3>General Information</h3></p>';
