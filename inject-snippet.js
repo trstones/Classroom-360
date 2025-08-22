@@ -69,6 +69,9 @@ window.addEventListener("load", function () {
                     }
                 }
                 html += '</ul>';
+                html += '<br>';
+                html += '<a href="https://www.colby.edu/people/offices-directory/events/all-forms/event-request-form/"><em>&nbsp;Book This Venue For An Event&nbsp; &nbsp;</em></a>';
+                html += '<a href="https://colby.teamdynamix.com/TDClient/1928/Portal/Home/"><em>ITS Technical Support</em></a></li>';
                 html += '<hr>';
             }
                 
