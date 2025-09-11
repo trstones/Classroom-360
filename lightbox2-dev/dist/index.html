@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lightbox2 Test Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Lightbox2 CSS (hosted on your GitHub Pages repo) -->
+  <link rel="stylesheet" href="dist/css/lightbox.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .gallery img {
+      max-width: 200px;
+      height: auto;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Lightbox2 Test Gallery</h1>
+
+  <div class="gallery">
+    <!-- Replace with your own images -->
+    <a href="https://picsum.photos/800/600?image=10" data-lightbox="mygallery" data-title="Sample Image 1">
+      <img src="https://picsum.photos/200/150?image=10" alt="Sample 1">
+    </a>
+
+    <a href="https://picsum.photos/800/600?image=20" data-lightbox="mygallery" data-title="Sample Image 2">
+      <img src="https://picsum.photos/200/150?image=20" alt="Sample 2">
+    </a>
+  </div>
+
+  <!-- Lightbox2 JS (hosted on your GitHub Pages repo) -->
+  <script src="dist/js/lightbox.min.js"></script>
+</body>
+</html>
