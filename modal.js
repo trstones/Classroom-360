@@ -1,13 +1,10 @@
-function initImageModals() {
-    const modalTriggers = document.querySelectorAll('[data-modal-image]');
-    
-    modalTriggers.forEach(trigger => {
-        trigger.addEventListener('click', function() {
-            const imageSrc = this.getAttribute('data-modal-image');
-            openModal(imageSrc);
-        });
-    });
-}
+document.addEventListener('click', function(e) {
+    const modalTrigger = e.target.closest('[data-modal-image]');
+    if (modalTrigger) {
+        const imageSrc = modalTrigger.getAttribute('data-modal-image');
+        openModal(imageSrc);
+    }
+});
 
 function openModal(imageSrc) {
     const modal = document.createElement('div');
@@ -36,5 +33,3 @@ function closeModal(modal) {
     modal.remove();
     document.body.style.overflow = 'auto';
 }
-
-document.addEventListener('DOMContentLoaded', initImageModals);
