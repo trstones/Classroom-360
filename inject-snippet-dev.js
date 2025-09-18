@@ -51,7 +51,11 @@ window.addEventListener("load", function () {
             }
 
             html += `
+            <hr>
+            <h3>360 Image</h3>
+            <p><i>Click and drag to rotate</i></p>
             <p><iframe allow-same-origin="" height="300" src="https://trstones.github.io/Classroom-360/ImagePages/Arey-001.html" width="100%"></iframe></p>
+            <hr>
             <h3>Venue Images</h3>
             <p><i>Click to enlarge</i></p>
             <div style="display:flex; flex-wrap:nowrap; justify-content:center; max-width:100%; max-height:200px;">
@@ -115,10 +119,7 @@ window.addEventListener("load", function () {
                 }
             }
             html += '</ul>';
-            html += '<hr>';
             
-            html += '<h3>360 Image</strong></h3>';
-            html += '<p><i>Click and drag to rotate</i></p>';
 
             snippetDiv.innerHTML = html;
         })
