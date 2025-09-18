@@ -52,12 +52,25 @@ window.addEventListener("load", function () {
                 html += '<center><a class="btn btn-default btn-block" style="width:75%; margin:3px 0;" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55467" role="button">Return to Venue Lookup</a></center>'
             }
 
+
             html += `
             <hr>
-            <h3>360 Image</h3>
-            <p><i>Click and drag to rotate</i></p>
-            <p><iframe allow-same-origin="" height="300" src="https://trstones.github.io/Classroom-360/ImagePages/${img360}" width="100%"></iframe></p>
-            <hr>
+            `;
+
+            for (let i = 0; i < labels.length; i++) {
+                const value = values[i];
+                if (img360.includes(labels[i]) && value != null && value !== "") {
+                    html += `
+                    <h3>360 Image</h3>
+                    <p><i>Click and drag to rotate</i></p>
+                    <p><iframe allow-same-origin="" height="300" src="https://trstones.github.io/Classroom-360/ImagePages/${value}" width="100%"></iframe></p>
+                    <hr>
+                    `;
+                }
+            }
+
+
+            html += `
             <h3>Venue Images</h3>
             <p><i>Click to enlarge</i></p>
             <div style="display:flex; flex-wrap:nowrap; justify-content:center; max-width:100%; max-height:200px;">
