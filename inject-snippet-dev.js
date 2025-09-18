@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
     const snippetDiv = document.querySelector('.external-snippet');
 
-    fetch("https://trstones.github.io/Classroom-360/classroom-database-Aug6-2025.csv")
+    fetch("https://trstones.github.io/Classroom-360/classroom-database-Aug6-2025-dev.csv")
         .then(response => response.text())
         .then(csv => {
             const roomID = getRoomID();
@@ -40,8 +40,10 @@ window.addEventListener("load", function () {
             const equip = ["Technology/Equipment Additional Notes", "Computer System", "Operating System", "PC CCID", "Number of Lab Computers"];
             const venue = ["Description", "Equipment", "Features", "Seating (Fixed/Open)", "Seating (capacity)", "Microphones"];
             const venue_bool = ["Is Venue"];
+            const img360 = ["360 Image Page"];
+            const venue_img = ["Venue_Image_1", "Venue_Image_2", "Venue_Image_3", "Venue_Image_4", "Venue_Image_5", "Venue_Image_6", "Venue_Image_7", "Venue_Image_8"];
             
-            //console.log("is_venue:", is_venue);
+            console.log("9/18/25 11:10a");
             
             let html = "";
 
@@ -54,7 +56,7 @@ window.addEventListener("load", function () {
             <hr>
             <h3>360 Image</h3>
             <p><i>Click and drag to rotate</i></p>
-            <p><iframe allow-same-origin="" height="300" src="https://trstones.github.io/Classroom-360/ImagePages/Arey-001.html" width="100%"></iframe></p>
+            <p><iframe allow-same-origin="" height="300" src="https://trstones.github.io/Classroom-360/ImagePages/${img360}" width="100%"></iframe></p>
             <hr>
             <h3>Venue Images</h3>
             <p><i>Click to enlarge</i></p>
@@ -66,6 +68,7 @@ window.addEventListener("load", function () {
             <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;"><img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
             </div>
             <p>&nbsp;</p>
+            <hr>
             `;
 
 
