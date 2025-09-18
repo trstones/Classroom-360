@@ -44,7 +44,25 @@ window.addEventListener("load", function () {
             //console.log("is_venue:", is_venue);
             
             let html = "";
+
+            html += `
+            <h3>Venue Images</h3>
+            <p><i>Click to enlarge</i></p>
+            <div style="display:flex; flex-wrap:nowrap; justify-content:center; max-width:100%; max-height:200px;">
+            <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;"><img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
+            <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;"><img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
+            <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;"><img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
+            <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;"><img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
+            <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;"><img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
+            </div>
+            <p>&nbsp;</p>
+            `;
+
+
             html += '<center><a class="btn btn-default btn-block" style="width:75%" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55250" role="button">Return to Classroom Catalog</a></center>'
+            if (dict["Is Venue"] == "Yes") {
+                html += '<center><a class="btn btn-default btn-block" style="width:75%; margin:3px 0;" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55467" role="button">Return to Venue Lookup</a></center>'
+            }
             html += '<p><h3>General Information</h3></p>';
             html += '<ul>';
             for (let i = 0; i < labels.length; i++) {
@@ -68,6 +86,7 @@ window.addEventListener("load", function () {
                 html += '</ul>';
                 html += '<br>';
                 html += '<a href="https://www.colby.edu/people/offices-directory/events/all-forms/event-request-form/"><em>&nbsp;Book This Venue For An Event&nbsp; &nbsp;</em></a>';
+                html += '<br>';
                 html += '<a href="https://colby.teamdynamix.com/TDClient/1928/Portal/Home/"><em>ITS Technical Support</em></a></li>';
                 html += '<hr>';
             }
