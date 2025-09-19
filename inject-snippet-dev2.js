@@ -71,7 +71,6 @@ window.addEventListener("load", function () {
                     <div style="display:flex; flex-wrap:nowrap; justify-content:center; max-width:100%; max-height:200px;">
                         ${venueImageHtml}
                     </div>
-                    <p>&nbsp;</p>
                     <hr>
                 `;
             }
