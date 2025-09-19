@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
     const snippetDiv = document.querySelector('.external-snippet');
 
-    fetch("https://trstones.github.io/Classroom-360/classroom-database-Aug6-2025-dev.csv")
+    fetch("https://trstones.github.io/Classroom-360/classroom-database.csv")
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
