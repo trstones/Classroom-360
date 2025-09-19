@@ -32,7 +32,7 @@ window.addEventListener("load", function () {
 
             const isVenue = roomData["Is Venue"] === "Yes";
             
-            console.log("9/18/25 11:10a");
+            //console.log("9/18/25 11:10a");
             
             // Generate HTML - combined into cleaner blocks
             let html = `
@@ -62,27 +62,14 @@ window.addEventListener("load", function () {
                 `;
             }
 
-            // Venue Images section (currently hardcoded as requested)
-            if (isVenue) {
-            html += `
+            // Venue Images section (dynamic from CSV)
+            const venueImageHtml = generateVenueImages(roomData, fieldCategories.venue_img);
+            if (venueImageHtml) {
+                html += `
                     <h3>Venue Images</h3>
                     <p><i>Click to enlarge</i></p>
                     <div style="display:flex; flex-wrap:nowrap; justify-content:center; max-width:100%; max-height:200px;">
-                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                        </div>
-                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                        </div>
-                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                        </div>
-                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                        </div>
-                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                        </div>
+                        ${venueImageHtml}
                     </div>
                     <p>&nbsp;</p>
                     <hr>
@@ -247,4 +234,25 @@ function parseCSVLine(line) {
     result.push(currentField.trim());
     
     return result;
+}
+
+function generateVenueImages(data, venueImageFields) {
+    const baseUrl = "https://trstones.github.io/Classroom-360/ImagesFlat/";
+    
+    return venueImageFields
+        .map(fieldName => {
+            const filename = data[fieldName];
+            if (filename != null && filename !== "") {
+                return `
+                    <div data-modal-image="${baseUrl}${filename}" 
+                         style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
+                        <img src="${baseUrl}${filename}" 
+                             style="width:100%; height:100%; object-fit:cover;" />
+                    </div>
+                `;
+            }
+            return "";
+        })
+        .filter(imageDiv => imageDiv !== "")
+        .join("");
 }
