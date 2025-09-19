@@ -63,29 +63,31 @@ window.addEventListener("load", function () {
             }
 
             // Venue Images section (currently hardcoded as requested)
+            if (isVenue) {
             html += `
-                <h3>Venue Images</h3>
-                <p><i>Click to enlarge</i></p>
-                <div style="display:flex; flex-wrap:nowrap; justify-content:center; max-width:100%; max-height:200px;">
-                    <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                        <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="width:100%; height:100%; object-fit:cover;" />
+                    <h3>Venue Images</h3>
+                    <p><i>Click to enlarge</i></p>
+                    <div style="display:flex; flex-wrap:nowrap; justify-content:center; max-width:100%; max-height:200px;">
+                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
+                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0928.jpg" style="width:100%; height:100%; object-fit:cover;" />
+                        </div>
+                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
+                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="width:100%; height:100%; object-fit:cover;" />
+                        </div>
+                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
+                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="width:100%; height:100%; object-fit:cover;" />
+                        </div>
+                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
+                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="width:100%; height:100%; object-fit:cover;" />
+                        </div>
+                        <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
+                            <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="width:100%; height:100%; object-fit:cover;" />
+                        </div>
                     </div>
-                    <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                        <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0930.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                    </div>
-                    <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                        <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0931.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                    </div>
-                    <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                        <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0933.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                    </div>
-                    <div data-modal-image="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="flex:1; margin:5px; height:150px; overflow:hidden; min-width:20px; cursor:pointer;">
-                        <img src="https://www.colby.edu/its/wp-content/uploads/sites/145/2024/07/IMG_0935.jpg" style="width:100%; height:100%; object-fit:cover;" />
-                    </div>
-                </div>
-                <p>&nbsp;</p>
-                <hr>
-            `;
+                    <p>&nbsp;</p>
+                    <hr>
+                `;
+            }
 
             // General Information section
             html += `
