@@ -41,7 +41,7 @@ window.addEventListener("load", function () {
                         Return to Classroom Catalog
                     </a>
                     ${isVenue ? `
-                        <a class="btn btn-default btn-block" style="width:75%; margin:3px 0;" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=55467" role="button">
+                        <a class="btn btn-default btn-block" style="width:75%; margin:3px 0;" href="https://colby.teamdynamix.com/TDClient/1928/Portal/Requests/ServiceDet?ID=33229" role="button">
                             Return to Venue Lookup
                         </a>
                     ` : ''}
