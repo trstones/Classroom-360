@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        /* Basic, clean styling that won't get bogged down */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; color: #333; }
+        .search-container { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px; }
+        .filter-group { margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 15px; }
+        .filter-item { display: flex; flex-direction: column; }
+        .filter-item label { font-weight: bold; margin-bottom: 5px; font-size: 0.9em; }
+        .filter-item input, .filter-item select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .checkbox-group { display: flex; gap: 15px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+        .checkbox-item { display: flex; align-items: center; gap: 5px; }
+        
+        button#searchBtn { background-color: #0056b3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1em; }
+        button#searchBtn:hover { background-color: #004494; }
+        
+        #results-status { margin-bottom: 15px; font-style: italic; color: #666; }
+        .room-card { background: white; border: 1px solid #e1e1e1; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .room-title { font-size: 1.2em; font-weight: bold; margin: 0 0 10px 0; color: #0056b3;}
+        .room-details { margin: 0; font-size: 0.9em; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <h2>Find a Classroom</h2>
+        
+        <div class="filter-group">
+            <div class="filter-item">
+                <label for="buildingSelect">Building</label>
+                <select id="buildingSelect">
+                    <option value="Any">Any Building</option>
+                    </select>
+            </div>
+            
+            <div class="filter-item">
+                <label for="roomTypeSelect">Room Type</label>
+                <select id="roomTypeSelect">
+                    <option value="Any">Any Type</option>
+                    </select>
+            </div>
+
+            <div class="filter-item">
+                <label for="capacityInput">Minimum Seats Required</label>
+                <input type="number" id="capacityInput" min="1" placeholder="e.g. 20">
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <div class="checkbox-item"><input type="checkbox" id="reqZoom"><label for="reqZoom">Zoom</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="reqComputerLab"><label for="reqComputerLab">Computer Lab</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="reqDvd"><label for="reqDvd">DVD Player</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="reqRecordStream"><label for="reqRecordStream">Record/Stream</label></div>
+        </div>
+        
+        <br>
+        <button id="searchBtn">Search Classrooms</button>
+    </div>
+
+    <div id="results-status">Loading classroom database...</div>
+    <div id="results-container"></div>
+
+    <script>
+        // CONFIGURATION: 
+        // 1. Use the "raw" GitHub URL to get the actual CSV file text
+        const CSV_URL = 'https://raw.githubusercontent.com/trstones/Classroom-360/main/classroom-database.csv';
+        
+        // 2. IMPORTANT: Update these string values to match the EXACT column headers in your CSV
+        const COLUMNS = {
+            building: 'Building',
+            roomNumber: 'Room Number',
+            roomType: 'Room Type',
+            capacity: 'Capacity',
+            zoom: 'Zoom',
+            computerLab: 'Computer Lab',
+            dvd: 'DVD',
+            recordStream: 'Record/Stream'
+        };
+
+        let masterData = []; // Will hold the parsed CSV data
+
+        // Fetch and parse the CSV on page load
+        Papa.parse(CSV_URL, {
+            download: true,
+            header: true,         // Uses the first row of CSV as keys
+            skipEmptyLines: true, // Ignores trailing blank lines in CSV
+            complete: function(results) {
+                masterData = results.data;
+                initializeFilters();
+                displayResults(masterData); // Show all rooms initially
+            },
+            error: function(err) {
+                document.getElementById('results-status').textContent = 'Error loading data. Please try again later.';
+                console.error("CSV Parse Error: ", err);
+            }
+        });
+
+        // Populate dropdowns based on unique values found in the CSV
+        function initializeFilters() {
+            const buildings = new Set();
+            const roomTypes = new Set();
+
+            masterData.forEach(row => {
+                if (row[COLUMNS.building]) buildings.add(row[COLUMNS.building].trim());
+                if (row[COLUMNS.roomType]) roomTypes.add(row[COLUMNS.roomType].trim());
+            });
+
+            const buildingSelect = document.getElementById('buildingSelect');
+            Array.from(buildings).sort().forEach(bldg => {
+                const opt = document.createElement('option');
+                opt.value = bldg;
+                opt.textContent = bldg; // Using textContent prevents XSS
+                buildingSelect.appendChild(opt);
+            });
+
+            const roomTypeSelect = document.getElementById('roomTypeSelect');
+            Array.from(roomTypes).sort().forEach(type => {
+                const opt = document.createElement('option');
+                opt.value = type;
+                opt.textContent = type;
+                roomTypeSelect.appendChild(opt);
+            });
+        }
+
+        // The main filtering logic
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const prefBuilding = document.getElementById('buildingSelect').value;
+            const prefRoomType = document.getElementById('roomTypeSelect').value;
+            const reqCapacity = parseInt(document.getElementById('capacityInput').value, 10) || 0;
+            
+            const reqZoom = document.getElementById('reqZoom').checked;
+            const reqComputerLab = document.getElementById('reqComputerLab').checked;
+            const reqDvd = document.getElementById('reqDvd').checked;
+            const reqRecordStream = document.getElementById('reqRecordStream').checked;
+
+            // Helper function to check if a CSV column equals "Yes", "True", or "1"
+            const isYes = (val) => val && ['yes', 'true', 'y', '1'].includes(val.toString().toLowerCase().trim());
+
+            const filteredData = masterData.filter(room => {
+                // Check Building
+                if (prefBuilding !== 'Any' && room[COLUMNS.building] !== prefBuilding) return false;
+                
+                // Check Room Type
+                if (prefRoomType !== 'Any' && room[COLUMNS.roomType] !== prefRoomType) return false;
+                
+                // Check Capacity (parse CSV string to integer safely)
+                const roomCap = parseInt(room[COLUMNS.capacity], 10) || 0;
+                if (roomCap < reqCapacity) return false;
+                
+                // Check Checkboxes (Only filter out if user requested it, but room doesn't have it)
+                if (reqZoom && !isYes(room[COLUMNS.zoom])) return false;
+                if (reqComputerLab && !isYes(room[COLUMNS.computerLab])) return false;
+                if (reqDvd && !isYes(room[COLUMNS.dvd])) return false;
+                if (reqRecordStream && !isYes(room[COLUMNS.recordStream])) return false;
+
+                return true; // Passed all filters!
+            });
+
+            displayResults(filteredData);
+        });
+
+        // Render the filtered list to the DOM safely
+        function displayResults(data) {
+            const container = document.getElementById('results-container');
+            const status = document.getElementById('results-status');
+            
+            container.innerHTML = ''; // Clear previous results
+            status.textContent = `Found ${data.length} classroom(s).`;
+
+            data.forEach(room => {
+                // Create card container
+                const card = document.createElement('div');
+                card.className = 'room-card';
+
+                // Create title
+                const title = document.createElement('h3');
+                title.className = 'room-title';
+                // E.g., "Main Hall - Room 101"
+                title.textContent = `${room[COLUMNS.building] || 'Unknown'} - ${room[COLUMNS.roomNumber] || 'Unknown'}`;
+                
+                // Create details text
+                const details = document.createElement('p');
+                details.className = 'room-details';
+                
+                let detailsText = `Type: ${room[COLUMNS.roomType] || 'N/A'} | Seats: ${room[COLUMNS.capacity] || 'N/A'}`;
+                
+                // Add features list if they exist
+                const features = [];
+                const isYes = (val) => val && ['yes', 'true', 'y', '1'].includes(val.toString().toLowerCase().trim());
+                
+                if (isYes(room[COLUMNS.zoom])) features.push('Zoom');
+                if (isYes(room[COLUMNS.computerLab])) features.push('Computer Lab');
+                if (isYes(room[COLUMNS.dvd])) features.push('DVD Player');
+                if (isYes(room[COLUMNS.recordStream])) features.push('Record/Stream');
+                
+                if (features.length > 0) {
+                    detailsText += ` | Features: ${features.join(', ')}`;
+                }
+
+                details.textContent = detailsText;
+
+                /* * FUTURE: Linking to KB Articles
+                 * Once you map hardcoded names, you can uncomment and alter the code below to add a link.
+                 * * const kbLink = document.createElement('a');
+                 * // Example: creating a dynamic search link in TDx based on room name
+                 * kbLink.href = `https://yourcollege.teamdynamix.com/TDClient/Search/?q=${encodeURIComponent(room[COLUMNS.roomNumber])}`;
+                 * kbLink.textContent = "View KB Article";
+                 * kbLink.target = "_blank"; // Opens in new tab
+                 * details.appendChild(document.createElement('br'));
+                 * details.appendChild(kbLink);
+                 */
+
+                // Append elements safely to DOM
+                card.appendChild(title);
+                card.appendChild(details);
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
