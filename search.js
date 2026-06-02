@@ -1,21 +1,34 @@
-(function() {
-    // 1. Identify the container on the TDx page
-    const appContainer = document.getElementById('classroom-search-app');
-    if (!appContainer) return; // Safely exit if not on the search page
+window.addEventListener("load", function () {
+    // 1. Identify the search app container on the TDx page
+    const searchDiv = document.querySelector('.external-search-app');
+    if (!searchDiv) return; // Safely exit if this isn't the search page
 
-    // 2. Inject the CSS styles directly into the TDx page head
+    // 2. Dynamically load PapaParse from your whitelisted domain
+    const papaScript = document.createElement('script');
+    papaScript.src = "https://trstones.github.io/Classroom-360/papaparse.min.js";
+    
+    papaScript.onload = function() {
+        // Once PapaParse is loaded and ready, initialize the search engine
+        initSearchEngine(searchDiv);
+    };
+    
+    document.head.appendChild(papaScript);
+});
+
+function initSearchEngine(container) {
+    // 3. Inject CSS styles directly into the page head
     const styles = `
         .search-container { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px; }
         .filter-group { margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 15px; }
         .filter-item { display: flex; flex-direction: column; }
         .filter-item label { font-weight: bold; margin-bottom: 5px; font-size: 0.9em; color: #333; }
-        .filter-item input, .filter-item select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white; }
+        .filter-item input, .filter-item select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333; }
         .checkbox-group { display: flex; gap: 15px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
         .checkbox-item { display: flex; align-items: center; gap: 5px; color: #333; }
-        button#searchBtn { background-color: #0056b3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1em; }
+        button#searchBtn { background-color: #0056b3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 10px;}
         button#searchBtn:hover { background-color: #004494; }
         #results-status { margin-bottom: 15px; font-style: italic; color: #666; }
-        .room-card { background: white; border: 1px solid #e1e1e1; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .room-card { background: white; border: 1px solid #e1e1e1; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: left;}
         .room-title { font-size: 1.2em; font-weight: bold; margin: 0 0 10px 0; }
         .room-title a { color: #0056b3; text-decoration: none; }
         .room-title a:hover { text-decoration: underline; }
@@ -26,8 +39,8 @@
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
 
-    // 3. Inject the Search UI interface HTML layout
-    appContainer.innerHTML = `
+    // 4. Build and inject the Search UI
+    container.innerHTML = `
         <div class="search-container">
             <h2>Find a Space</h2>
             <div class="filter-group">
@@ -51,14 +64,13 @@
                 <div class="checkbox-item"><input type="checkbox" id="reqRecordStream"><label for="reqRecordStream">Record/Stream</label></div>
                 <div class="checkbox-item"><input type="checkbox" id="reqVenue"><label for="reqVenue">Venue</label></div>
             </div>
-            <br>
             <button id="searchBtn">Search</button>
         </div>
         <div id="results-status">Loading database...</div>
         <div id="results-container"></div>
     `;
 
-    // 4. Main Search Engine Logic (Identical to your working code)
+    // 5. App Data Properties & Logic
     const CSV_URL = 'https://raw.githubusercontent.com/trstones/Classroom-360/main/classroom-database.csv';
     const COLUMNS = {
         building: 'Building', roomNumber: 'Room Number', roomType: 'WD Room Type',
@@ -71,6 +83,7 @@
     const isYes = (val) => val && val.toString().toLowerCase().trim() === 'yes';
     const isLab = (val) => val && val.toString().trim() !== '' && parseInt(val, 10) > 0;
 
+    // Execute Parse using the freshly loaded Papa library
     Papa.parse(CSV_URL, {
         download: true,
         header: true,
@@ -81,7 +94,7 @@
             displayResults(masterData);
         },
         error: function(err) {
-            document.getElementById('results-status').textContent = 'Error loading data.';
+            document.getElementById('results-status').textContent = 'Error loading database.';
             console.error(err);
         }
     });
@@ -138,7 +151,7 @@
 
             const title = document.createElement('h3');
             title.className = 'room-title';
-            const titleText = `${room[COLUMNS.building] || 'Unknown'} ${room[COLUMNS.roomNumber] || 'Unknown'}`;
+            const titleText = `${room[COLUMNS.building] || 'Unknown'} - ${room[COLUMNS.roomNumber] || 'Unknown'}`;
             const url = room[COLUMNS.tdxUrl] ? room[COLUMNS.tdxUrl].trim() : '';
 
             if (url) {
@@ -176,4 +189,4 @@
         span.textContent = text;
         container.appendChild(span);
     }
-})();
+}
