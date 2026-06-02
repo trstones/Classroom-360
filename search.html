@@ -6,7 +6,6 @@
     <title>Classroom Search</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
-        /* Basic, clean styling that won't get bogged down */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; color: #333; }
         .search-container { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px; }
         .filter-group { margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 15px; }
@@ -23,12 +22,13 @@
         .room-card { background: white; border: 1px solid #e1e1e1; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .room-title { font-size: 1.2em; font-weight: bold; margin: 0 0 10px 0; color: #0056b3;}
         .room-details { margin: 0; font-size: 0.9em; line-height: 1.5; }
+        .feature-badge { display: inline-block; background: #e9ecef; padding: 2px 6px; border-radius: 4px; margin-right: 5px; margin-top: 5px; font-size: 0.85em; color: #495057; }
     </style>
 </head>
 <body>
 
     <div class="search-container">
-        <h2>Find a Classroom</h2>
+        <h2>Find a Space</h2>
         
         <div class="filter-group">
             <div class="filter-item">
@@ -56,43 +56,47 @@
             <div class="checkbox-item"><input type="checkbox" id="reqComputerLab"><label for="reqComputerLab">Computer Lab</label></div>
             <div class="checkbox-item"><input type="checkbox" id="reqDvd"><label for="reqDvd">DVD Player</label></div>
             <div class="checkbox-item"><input type="checkbox" id="reqRecordStream"><label for="reqRecordStream">Record/Stream</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="reqVenue"><label for="reqVenue">Venue</label></div>
         </div>
         
         <br>
-        <button id="searchBtn">Search Classrooms</button>
+        <button id="searchBtn">Search</button>
     </div>
 
-    <div id="results-status">Loading classroom database...</div>
+    <div id="results-status">Loading database...</div>
     <div id="results-container"></div>
 
     <script>
-        // CONFIGURATION: 
-        // 1. Use the "raw" GitHub URL to get the actual CSV file text
         const CSV_URL = 'https://raw.githubusercontent.com/trstones/Classroom-360/main/classroom-database.csv';
         
-        // 2. IMPORTANT: Update these string values to match the EXACT column headers in your CSV
+        // Updated mappings
         const COLUMNS = {
             building: 'Building',
             roomNumber: 'Room Number',
-            roomType: 'Room Type',
-            capacity: 'Capacity',
-            zoom: 'Zoom',
-            computerLab: 'Computer Lab',
-            dvd: 'DVD',
-            recordStream: 'Record/Stream'
+            roomType: 'WD Room Type',
+            capacity: 'Seating Capacity',
+            zoom: 'Video Conferencing (Zoom Room)',
+            computerLab: 'Number of Lab Computers',
+            dvd: 'Optical Drive (DVD/Blu-Ray)',
+            recordStream: 'Record / Stream',
+            venue: 'Is Venue'
         };
 
-        let masterData = []; // Will hold the parsed CSV data
+        let masterData = [];
 
-        // Fetch and parse the CSV on page load
+        // Helper functions for your specific business rules
+        const isYes = (val) => val && val.toString().toLowerCase().trim() === 'yes';
+        // Checks if there is a value, and ensures it's treated as a valid number > 0
+        const isLab = (val) => val && val.toString().trim() !== '' && parseInt(val, 10) > 0;
+
         Papa.parse(CSV_URL, {
             download: true,
-            header: true,         // Uses the first row of CSV as keys
-            skipEmptyLines: true, // Ignores trailing blank lines in CSV
+            header: true,
+            skipEmptyLines: true,
             complete: function(results) {
                 masterData = results.data;
                 initializeFilters();
-                displayResults(masterData); // Show all rooms initially
+                displayResults(masterData);
             },
             error: function(err) {
                 document.getElementById('results-status').textContent = 'Error loading data. Please try again later.';
@@ -100,21 +104,20 @@
             }
         });
 
-        // Populate dropdowns based on unique values found in the CSV
         function initializeFilters() {
             const buildings = new Set();
             const roomTypes = new Set();
 
             masterData.forEach(row => {
-                if (row[COLUMNS.building]) buildings.add(row[COLUMNS.building].trim());
-                if (row[COLUMNS.roomType]) roomTypes.add(row[COLUMNS.roomType].trim());
+                if (row[COLUMNS.building] && row[COLUMNS.building].trim() !== '') buildings.add(row[COLUMNS.building].trim());
+                if (row[COLUMNS.roomType] && row[COLUMNS.roomType].trim() !== '') roomTypes.add(row[COLUMNS.roomType].trim());
             });
 
             const buildingSelect = document.getElementById('buildingSelect');
             Array.from(buildings).sort().forEach(bldg => {
                 const opt = document.createElement('option');
                 opt.value = bldg;
-                opt.textContent = bldg; // Using textContent prevents XSS
+                opt.textContent = bldg;
                 buildingSelect.appendChild(opt);
             });
 
@@ -127,7 +130,6 @@
             });
         }
 
-        // The main filtering logic
         document.getElementById('searchBtn').addEventListener('click', function() {
             const prefBuilding = document.getElementById('buildingSelect').value;
             const prefRoomType = document.getElementById('roomTypeSelect').value;
@@ -137,9 +139,7 @@
             const reqComputerLab = document.getElementById('reqComputerLab').checked;
             const reqDvd = document.getElementById('reqDvd').checked;
             const reqRecordStream = document.getElementById('reqRecordStream').checked;
-
-            // Helper function to check if a CSV column equals "Yes", "True", or "1"
-            const isYes = (val) => val && ['yes', 'true', 'y', '1'].includes(val.toString().toLowerCase().trim());
+            const reqVenue = document.getElementById('reqVenue').checked;
 
             const filteredData = masterData.filter(room => {
                 // Check Building
@@ -152,74 +152,66 @@
                 const roomCap = parseInt(room[COLUMNS.capacity], 10) || 0;
                 if (roomCap < reqCapacity) return false;
                 
-                // Check Checkboxes (Only filter out if user requested it, but room doesn't have it)
+                // Check Checkboxes against explicit rules
                 if (reqZoom && !isYes(room[COLUMNS.zoom])) return false;
-                if (reqComputerLab && !isYes(room[COLUMNS.computerLab])) return false;
+                if (reqComputerLab && !isLab(room[COLUMNS.computerLab])) return false;
                 if (reqDvd && !isYes(room[COLUMNS.dvd])) return false;
                 if (reqRecordStream && !isYes(room[COLUMNS.recordStream])) return false;
+                if (reqVenue && !isYes(room[COLUMNS.venue])) return false;
 
-                return true; // Passed all filters!
+                return true; 
             });
 
             displayResults(filteredData);
         });
 
-        // Render the filtered list to the DOM safely
         function displayResults(data) {
             const container = document.getElementById('results-container');
             const status = document.getElementById('results-status');
             
-            container.innerHTML = ''; // Clear previous results
-            status.textContent = `Found ${data.length} classroom(s).`;
+            container.innerHTML = ''; 
+            status.textContent = `Found ${data.length} space(s).`;
 
             data.forEach(room => {
-                // Create card container
                 const card = document.createElement('div');
                 card.className = 'room-card';
 
-                // Create title
                 const title = document.createElement('h3');
                 title.className = 'room-title';
-                // E.g., "Main Hall - Room 101"
-                title.textContent = `${room[COLUMNS.building] || 'Unknown'} - ${room[COLUMNS.roomNumber] || 'Unknown'}`;
+                title.textContent = `${room[COLUMNS.building] || 'Unknown Building'} - ${room[COLUMNS.roomNumber] || 'Unknown Room'}`;
                 
-                // Create details text
                 const details = document.createElement('p');
                 details.className = 'room-details';
                 
+                // Format basic details
                 let detailsText = `Type: ${room[COLUMNS.roomType] || 'N/A'} | Seats: ${room[COLUMNS.capacity] || 'N/A'}`;
-                
-                // Add features list if they exist
-                const features = [];
-                const isYes = (val) => val && ['yes', 'true', 'y', '1'].includes(val.toString().toLowerCase().trim());
-                
-                if (isYes(room[COLUMNS.zoom])) features.push('Zoom');
-                if (isYes(room[COLUMNS.computerLab])) features.push('Computer Lab');
-                if (isYes(room[COLUMNS.dvd])) features.push('DVD Player');
-                if (isYes(room[COLUMNS.recordStream])) features.push('Record/Stream');
-                
-                if (features.length > 0) {
-                    detailsText += ` | Features: ${features.join(', ')}`;
-                }
-
                 details.textContent = detailsText;
-
-                /* * FUTURE: Linking to KB Articles
-                 * Once you map hardcoded names, you can uncomment and alter the code below to add a link.
-                 * * const kbLink = document.createElement('a');
-                 * // Example: creating a dynamic search link in TDx based on room name
-                 * kbLink.href = `https://yourcollege.teamdynamix.com/TDClient/Search/?q=${encodeURIComponent(room[COLUMNS.roomNumber])}`;
-                 * kbLink.textContent = "View KB Article";
-                 * kbLink.target = "_blank"; // Opens in new tab
-                 * details.appendChild(document.createElement('br'));
-                 * details.appendChild(kbLink);
-                 */
-
-                // Append elements safely to DOM
                 card.appendChild(title);
                 card.appendChild(details);
+
+                // Add features as little badges for better UI
+                const featuresContainer = document.createElement('div');
+                
+                if (isYes(room[COLUMNS.zoom])) addBadge(featuresContainer, 'Zoom');
+                if (isLab(room[COLUMNS.computerLab])) addBadge(featuresContainer, `Computer Lab (${room[COLUMNS.computerLab].trim()} stations)`);
+                if (isYes(room[COLUMNS.dvd])) addBadge(featuresContainer, 'DVD Player');
+                if (isYes(room[COLUMNS.recordStream])) addBadge(featuresContainer, 'Record/Stream');
+                if (isYes(room[COLUMNS.venue])) addBadge(featuresContainer, 'Venue');
+
+                if (featuresContainer.hasChildNodes()) {
+                    card.appendChild(featuresContainer);
+                }
+
                 container.appendChild(card);
             });
+        }
+
+        // Small helper to create feature badges cleanly
+        function addBadge(container, text) {
+            const span = document.createElement('span');
+            span.className = 'feature-badge';
+            span.textContent = text;
+            container.appendChild(span);
         }
     </script>
 </body>
