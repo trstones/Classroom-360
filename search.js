@@ -217,6 +217,7 @@ function buildAndMount(mountEl, masterData) {
     const btn = document.createElement("button");
     btn.className   = "cs-btn";
     btn.textContent = "Search";
+    btn.type = "button";
     box.appendChild(btn);
 
     mountEl.innerHTML = ""; // clear loading message
