@@ -23,6 +23,10 @@
         .room-title { font-size: 1.2em; font-weight: bold; margin: 0 0 10px 0; color: #0056b3;}
         .room-details { margin: 0; font-size: 0.9em; line-height: 1.5; }
         .feature-badge { display: inline-block; background: #e9ecef; padding: 2px 6px; border-radius: 4px; margin-right: 5px; margin-top: 5px; font-size: 0.85em; color: #495057; }
+
+        /* Make the room title link look interactive */
+        .room-title a { color: #0056b3; text-decoration: none; }
+        .room-title a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -79,7 +83,9 @@
             computerLab: 'Number of Lab Computers',
             dvd: 'Optical Drive (DVD/Blu-Ray)',
             recordStream: 'Record / Stream',
-            venue: 'Is Venue'
+            venue: 'Is Venue',
+            searchable: 'Searchable',
+            tdxUrl: 'TDx URL'
         };
 
         let masterData = [];
@@ -94,7 +100,7 @@
             header: true,
             skipEmptyLines: true,
             complete: function(results) {
-                masterData = results.data;
+                masterData = results.data.filter(room => isYes(room[COLUMNS.searchable]));
                 initializeFilters();
                 displayResults(masterData);
             },
@@ -176,9 +182,23 @@
                 const card = document.createElement('div');
                 card.className = 'room-card';
 
+                // Create title with secure link out to TDx KB
                 const title = document.createElement('h3');
                 title.className = 'room-title';
-                title.textContent = `${room[COLUMNS.building] || 'Unknown Building'} ${room[COLUMNS.roomNumber] || 'Unknown Room'}`;
+                
+                const titleText = `${room[COLUMNS.building] || 'Unknown Building'} - ${room[COLUMNS.roomNumber] || 'Unknown Room'}`;
+                const url = room[COLUMNS.tdxUrl] ? room[COLUMNS.tdxUrl].trim() : '';
+
+                if (url) {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer'; // Security best practice for target="_blank"
+                    link.textContent = titleText;
+                    title.appendChild(link);
+                } else {
+                    title.textContent = titleText; // Fallback if URL is missing in CSV
+                }
                 
                 const details = document.createElement('p');
                 details.className = 'room-details';
