@@ -1,445 +1,371 @@
-/**
- * search-inject.js
- * Classroom Search — injectable script for TeamDynamix KB pages.
- *
- * HOW IT WORKS
- * ------------
- * TDx renders the KB article body into the DOM before this script runs.
- * This script:
- *   1. Finds a mount point element (see MOUNT_SELECTOR below).
- *   2. Dynamically loads PapaParse if it isn't already present.
- *   3. Injects scoped CSS into <head>.
- *   4. Builds the search UI inside the mount point.
- *   5. Fetches + parses the CSV, populates dropdowns, and wires up the
- *      Search button.
- *
- * MOUNT POINT
- * -----------
- * Add a <div class="classroom-search-root"></div> to the TDx KB article
- * body (edit the article in HTML/source mode).  If that element is absent
- * the script falls back to document.body so something always renders.
- *
- * DEBUG LOGGING
- * -------------
- * Every major step emits a console.log prefixed with [ClassroomSearch].
- * Errors are console.error. Open DevTools → Console and filter on that
- * prefix to trace any breakage.
- */
+// =============================================================================
+// search-inject.js  |  Classroom Search Widget for TDx
+// =============================================================================
+// DEPLOYMENT:
+//   1. Upload this file to GitHub Pages (same place as inject-snippet-prod.js).
+//   2. In TDx, add this script via the KB article's *script injection field*
+//      (the same mechanism used for inject-snippet-prod.js) — NOT as a raw
+//      <script> tag in the article body HTML (TDx strips those).
+//   3. In the article body HTML, add the mount point div:
+//         <div class="classroom-search-root"></div>
+//
+// DEBUG:
+//   Open browser DevTools → Console, filter on "[CS]" to see every step.
+// =============================================================================
 
-(function () {
-    "use strict";
+console.log("[CS] search-inject.js: file parsed and executing.");
 
-    /* ------------------------------------------------------------------ */
-    /* CONFIGURATION                                                         */
-    /* ------------------------------------------------------------------ */
+window.addEventListener("load", function () {
+    console.log("[CS] window load event fired.");
 
-    const CSV_URL =
-        "https://raw.githubusercontent.com/trstones/Classroom-360/main/classroom-database.csv";
+    // -------------------------------------------------------------------------
+    // STEP 1 — Find mount point
+    // -------------------------------------------------------------------------
+    const mountEl = document.querySelector(".classroom-search-root");
+    console.log("[CS] Mount point (.classroom-search-root):", mountEl);
 
-    const PAPAPARSE_CDN =
-        "https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js";
+    if (!mountEl) {
+        console.error(
+            "[CS] FATAL: Mount point not found. " +
+            "Add <div class='classroom-search-root'></div> to the TDx article body."
+        );
+        return;
+    }
 
-    /** CSS class on the element TDx should inject the widget into.        */
-    const MOUNT_SELECTOR = ".classroom-search-root";
+    // Show a loading indicator immediately so we know the script is alive.
+    mountEl.innerHTML = "<p><em>[CS] Script loaded. Fetching room database…</em></p>";
 
-    /** Column name mapping — matches search.html exactly.                 */
-    const COLUMNS = {
-        building:     "Building",
-        roomNumber:   "Room Number",
-        roomType:     "WD Room Type",
-        capacity:     "Seating Capacity",
-        zoom:         "Video Conferencing (Zoom Room)",
-        computerLab:  "Number of Lab Computers",
-        dvd:          "Optical Drive (DVD/Blu-Ray)",
-        recordStream: "Record / Stream",
-        venue:        "Is Venue",
-        searchable:   "Searchable",
-        tdxUrl:       "TDx URL",
-    };
-
-    /* ------------------------------------------------------------------ */
-    /* HELPERS                                                              */
-    /* ------------------------------------------------------------------ */
-
-    const log   = (...a) => console.log(  "[ClassroomSearch]", ...a);
-    const warn  = (...a) => console.warn( "[ClassroomSearch]", ...a);
-    const error = (...a) => console.error("[ClassroomSearch]", ...a);
-
-    const isYes = (val) =>
-        val && val.toString().toLowerCase().trim() === "yes";
-
-    const isLab = (val) =>
-        val && val.toString().trim() !== "" && parseInt(val, 10) > 0;
-
-    /* ------------------------------------------------------------------ */
-    /* CSS — injected once into <head>                                      */
-    /* ------------------------------------------------------------------ */
-
-    function injectStyles() {
-        if (document.getElementById("cs-styles")) {
-            log("Styles already injected, skipping.");
-            return;
-        }
-        log("Injecting styles into <head>.");
+    // -------------------------------------------------------------------------
+    // STEP 2 — Inject scoped CSS
+    // -------------------------------------------------------------------------
+    if (!document.getElementById("cs-injected-styles")) {
         const style = document.createElement("style");
-        style.id = "cs-styles";
+        style.id = "cs-injected-styles";
         style.textContent = `
-            /* ---- Classroom Search widget ---- */
-            .cs-root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #333; }
-            .cs-search-box { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px; }
-            .cs-search-box h2 { margin-top: 0; }
-            .cs-filter-group { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-            .cs-filter-item { display: flex; flex-direction: column; }
-            .cs-filter-item label { font-weight: bold; margin-bottom: 5px; font-size: 0.9em; }
-            .cs-filter-item input,
-            .cs-filter-item select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-            .cs-checkbox-group { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
-            .cs-checkbox-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-            .cs-search-btn { background-color: #0056b3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 15px; }
-            .cs-search-btn:hover { background-color: #004494; }
+            .cs-wrap { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #333; }
+            .cs-box { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px; }
+            .cs-box h2 { margin-top: 0; }
+            .cs-row { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+            .cs-field { display: flex; flex-direction: column; }
+            .cs-field label { font-weight: bold; margin-bottom: 5px; font-size: 0.9em; }
+            .cs-field input, .cs-field select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+            .cs-checks { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+            .cs-check { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+            .cs-btn { background: #0056b3; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 15px; }
+            .cs-btn:hover { background: #004494; }
             .cs-status { margin-bottom: 15px; font-style: italic; color: #666; }
-            .cs-room-card { background: white; border: 1px solid #e1e1e1; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-            .cs-room-title { font-size: 1.2em; font-weight: bold; margin: 0 0 8px 0; color: #0056b3; }
-            .cs-room-title a { color: #0056b3; text-decoration: none; }
-            .cs-room-title a:hover { text-decoration: underline; }
-            .cs-room-details { margin: 0 0 6px 0; font-size: 0.9em; line-height: 1.5; }
-            .cs-badge { display: inline-block; background: #e9ecef; padding: 2px 8px; border-radius: 4px; margin: 3px 4px 0 0; font-size: 0.82em; color: #495057; }
+            .cs-card { background: white; border: 1px solid #e1e1e1; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,.05); }
+            .cs-card-title { font-size: 1.2em; font-weight: bold; margin: 0 0 8px; color: #0056b3; }
+            .cs-card-title a { color: #0056b3; text-decoration: none; }
+            .cs-card-title a:hover { text-decoration: underline; }
+            .cs-card-meta { margin: 0 0 6px; font-size: .9em; line-height: 1.5; }
+            .cs-badge { display: inline-block; background: #e9ecef; padding: 2px 8px; border-radius: 4px; margin: 3px 4px 0 0; font-size: .82em; color: #495057; }
         `;
         document.head.appendChild(style);
-        log("Styles injected.");
+        console.log("[CS] Styles injected.");
+    } else {
+        console.log("[CS] Styles already present, skipping.");
     }
 
-    /* ------------------------------------------------------------------ */
-    /* DOM BUILDER — returns the root element                               */
-    /* ------------------------------------------------------------------ */
+    // -------------------------------------------------------------------------
+    // STEP 3 — Fetch CSV (same pattern as inject-snippet-prod.js)
+    // -------------------------------------------------------------------------
+    const CSV_URL = "https://raw.githubusercontent.com/trstones/Classroom-360/main/classroom-database.csv";
+    console.log("[CS] Fetching CSV from:", CSV_URL);
 
-    function buildUI(mountEl) {
-        log("Building search UI.");
-        mountEl.classList.add("cs-root");
+    fetch(CSV_URL)
+        .then(function (response) {
+            console.log("[CS] CSV fetch response — status:", response.status, response.statusText);
+            if (!response.ok) {
+                throw new Error("HTTP error fetching CSV: " + response.status);
+            }
+            return response.text();
+        })
+        .then(function (csvText) {
+            console.log("[CS] CSV text received, length:", csvText.length, "chars.");
 
-        /* ---- Search box ---- */
-        const box = document.createElement("div");
-        box.className = "cs-search-box";
+            // -----------------------------------------------------------------
+            // STEP 4 — Parse CSV with PapaParse (load it on demand if needed)
+            // -----------------------------------------------------------------
+            loadPapaParse(function () {
+                console.log("[CS] PapaParse ready. Parsing CSV…");
 
-        const heading = document.createElement("h2");
-        heading.textContent = "Find a Space";
-        box.appendChild(heading);
+                const parsed = window.Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                });
 
-        /* Dropdowns row */
-        const filterGroup = document.createElement("div");
-        filterGroup.className = "cs-filter-group";
+                console.log("[CS] Parse complete. Rows:", parsed.data.length,
+                            "| Errors:", parsed.errors.length);
+                if (parsed.errors.length) {
+                    console.warn("[CS] Parse warnings:", parsed.errors);
+                }
 
-        /* Building dropdown */
-        const bldgItem = makeFilterItem("Building", "cs-building");
-        const bldgSelect = document.createElement("select");
-        bldgSelect.id = "cs-building";
-        appendOption(bldgSelect, "Any", "Any Building");
-        bldgItem.appendChild(bldgSelect);
-        filterGroup.appendChild(bldgItem);
+                const masterData = parsed.data.filter(function (row) {
+                    return row["Searchable"] &&
+                           row["Searchable"].toString().toLowerCase().trim() === "yes";
+                });
+                console.log("[CS] Searchable rooms:", masterData.length);
 
-        /* Room Type dropdown */
-        const typeItem = makeFilterItem("Room Type", "cs-room-type");
-        const typeSelect = document.createElement("select");
-        typeSelect.id = "cs-room-type";
-        appendOption(typeSelect, "Any", "Any Type");
-        typeItem.appendChild(typeSelect);
-        filterGroup.appendChild(typeItem);
-
-        /* Capacity input */
-        const capItem = makeFilterItem("Minimum Seats Required", "cs-capacity");
-        const capInput = document.createElement("input");
-        capInput.type = "number";
-        capInput.id = "cs-capacity";
-        capInput.min = "1";
-        capInput.placeholder = "e.g. 20";
-        capItem.appendChild(capInput);
-        filterGroup.appendChild(capItem);
-
-        box.appendChild(filterGroup);
-
-        /* Checkboxes */
-        const checkboxDefs = [
-            { id: "cs-zoom",          label: "Zoom"           },
-            { id: "cs-computer-lab",  label: "Computer Lab"   },
-            { id: "cs-dvd",           label: "DVD Player"     },
-            { id: "cs-record-stream", label: "Record/Stream"  },
-            { id: "cs-venue",         label: "Venue"          },
-        ];
-
-        const cbGroup = document.createElement("div");
-        cbGroup.className = "cs-checkbox-group";
-
-        checkboxDefs.forEach(({ id, label }) => {
-            const item = document.createElement("div");
-            item.className = "cs-checkbox-item";
-            const cb = document.createElement("input");
-            cb.type = "checkbox";
-            cb.id = id;
-            const lbl = document.createElement("label");
-            lbl.htmlFor = id;
-            lbl.textContent = label;
-            item.appendChild(cb);
-            item.appendChild(lbl);
-            cbGroup.appendChild(item);
+                // -------------------------------------------------------------
+                // STEP 5 — Build UI and wire it up
+                // -------------------------------------------------------------
+                buildAndMount(mountEl, masterData);
+                console.log("[CS] Init complete.");
+            });
+        })
+        .catch(function (err) {
+            console.error("[CS] FATAL: Failed to load or parse CSV.", err);
+            mountEl.innerHTML =
+                "<p><strong>Classroom Search failed to load.</strong> " +
+                "Check the browser console for details (filter on [CS]).</p>";
         });
+});
 
-        box.appendChild(cbGroup);
-
-        /* Search button */
-        const btn = document.createElement("button");
-        btn.className = "cs-search-btn";
-        btn.textContent = "Search";
-        box.appendChild(btn);
-
-        mountEl.appendChild(box);
-
-        /* ---- Status + results ---- */
-        const status = document.createElement("div");
-        status.className = "cs-status";
-        status.textContent = "Loading database…";
-        mountEl.appendChild(status);
-
-        const resultsContainer = document.createElement("div");
-        resultsContainer.id = "cs-results";
-        mountEl.appendChild(resultsContainer);
-
-        log("UI built.");
-        return { bldgSelect, typeSelect, capInput, btn, status, resultsContainer };
+// =============================================================================
+// loadPapaParse — dynamically load PapaParse if it isn't already on the page
+// =============================================================================
+function loadPapaParse(callback) {
+    if (window.Papa) {
+        console.log("[CS] PapaParse already loaded.");
+        callback();
+        return;
     }
+    const CDN = "https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js";
+    console.log("[CS] Loading PapaParse from CDN:", CDN);
+    const s = document.createElement("script");
+    s.src = CDN;
+    s.onload = function () {
+        console.log("[CS] PapaParse loaded successfully.");
+        callback();
+    };
+    s.onerror = function () {
+        console.error("[CS] Failed to load PapaParse. Check network / CSP.");
+        // Surface the failure visibly in the mount point (already set above,
+        // but the catch in the outer chain will handle it via a thrown error).
+    };
+    document.head.appendChild(s);
+}
 
-    function makeFilterItem(labelText, forId) {
-        const item = document.createElement("div");
-        item.className = "cs-filter-item";
+// =============================================================================
+// buildAndMount — inject the search UI and bind events
+// =============================================================================
+function buildAndMount(mountEl, masterData) {
+    console.log("[CS] Building UI.");
+
+    mountEl.className = (mountEl.className + " cs-wrap").trim();
+
+    // ---- Search box ---------------------------------------------------------
+    const box = document.createElement("div");
+    box.className = "cs-box";
+
+    const h2 = document.createElement("h2");
+    h2.textContent = "Find a Space";
+    box.appendChild(h2);
+
+    // Dropdowns row
+    const row = document.createElement("div");
+    row.className = "cs-row";
+
+    const bldgSel  = makeSelect("cs-building",  "Building",             "Any Building");
+    const typeSel  = makeSelect("cs-room-type",  "Room Type",            "Any Type");
+    const capField = makeNumberInput("cs-capacity", "Minimum Seats Required", "e.g. 20");
+    row.appendChild(bldgSel.wrap);
+    row.appendChild(typeSel.wrap);
+    row.appendChild(capField.wrap);
+    box.appendChild(row);
+
+    // Populate dropdown options
+    const buildings = new Set();
+    const roomTypes = new Set();
+    masterData.forEach(function (r) {
+        const b = (r["Building"]     || "").trim();
+        const t = (r["WD Room Type"] || "").trim();
+        if (b) buildings.add(b);
+        if (t) roomTypes.add(t);
+    });
+    Array.from(buildings).sort().forEach(function (b) { appendOpt(bldgSel.el, b, b); });
+    Array.from(roomTypes).sort().forEach(function (t) { appendOpt(typeSel.el, t, t); });
+    console.log("[CS] Dropdowns populated —", buildings.size, "buildings,", roomTypes.size, "types.");
+
+    // Checkboxes
+    const cbDefs = [
+        { id: "cs-zoom",          label: "Zoom"          },
+        { id: "cs-lab",           label: "Computer Lab"  },
+        { id: "cs-dvd",           label: "DVD Player"    },
+        { id: "cs-stream",        label: "Record/Stream" },
+        { id: "cs-venue",         label: "Venue"         },
+    ];
+    const cbGroup = document.createElement("div");
+    cbGroup.className = "cs-checks";
+    cbDefs.forEach(function (def) {
+        const wrap  = document.createElement("div");
+        wrap.className = "cs-check";
+        const cb  = document.createElement("input");
+        cb.type   = "checkbox";
+        cb.id     = def.id;
         const lbl = document.createElement("label");
-        lbl.htmlFor = forId;
-        lbl.textContent = labelText;
-        item.appendChild(lbl);
-        return item;
-    }
+        lbl.htmlFor     = def.id;
+        lbl.textContent = def.label;
+        wrap.appendChild(cb);
+        wrap.appendChild(lbl);
+        cbGroup.appendChild(wrap);
+    });
+    box.appendChild(cbGroup);
 
-    function appendOption(select, value, text) {
-        const opt = document.createElement("option");
-        opt.value = value;
-        opt.textContent = text;
-        select.appendChild(opt);
-    }
+    // Search button
+    const btn = document.createElement("button");
+    btn.className   = "cs-btn";
+    btn.textContent = "Search";
+    box.appendChild(btn);
 
-    /* ------------------------------------------------------------------ */
-    /* FILTER + DISPLAY                                                     */
-    /* ------------------------------------------------------------------ */
+    mountEl.innerHTML = ""; // clear loading message
+    mountEl.appendChild(box);
 
-    function initDropdowns(masterData, bldgSelect, typeSelect) {
-        log("Populating dropdowns from", masterData.length, "searchable rooms.");
-        const buildings = new Set();
-        const roomTypes = new Set();
+    // ---- Status + results container ----------------------------------------
+    const statusEl    = document.createElement("div");
+    statusEl.className = "cs-status";
+    mountEl.appendChild(statusEl);
 
-        masterData.forEach((row) => {
-            const b = row[COLUMNS.building]?.trim();
-            const t = row[COLUMNS.roomType]?.trim();
-            if (b) buildings.add(b);
-            if (t) roomTypes.add(t);
+    const resultsEl = document.createElement("div");
+    mountEl.appendChild(resultsEl);
+
+    // ---- Show all rooms on first load --------------------------------------
+    renderResults(masterData, statusEl, resultsEl);
+
+    // ---- Search button handler ---------------------------------------------
+    btn.addEventListener("click", function () {
+        console.log("[CS] Search clicked.");
+
+        const prefBuilding  = bldgSel.el.value;
+        const prefType      = typeSel.el.value;
+        const minCap        = parseInt(capField.el.value, 10) || 0;
+        const wantZoom      = document.getElementById("cs-zoom").checked;
+        const wantLab       = document.getElementById("cs-lab").checked;
+        const wantDvd       = document.getElementById("cs-dvd").checked;
+        const wantStream    = document.getElementById("cs-stream").checked;
+        const wantVenue     = document.getElementById("cs-venue").checked;
+
+        console.log("[CS] Filters →", {
+            prefBuilding, prefType, minCap,
+            wantZoom, wantLab, wantDvd, wantStream, wantVenue
         });
 
-        Array.from(buildings).sort().forEach((b) => appendOption(bldgSelect, b, b));
-        Array.from(roomTypes).sort().forEach((t) => appendOption(typeSelect, t, t));
-        log("Dropdowns populated —", buildings.size, "buildings,", roomTypes.size, "room types.");
-    }
+        const filtered = masterData.filter(function (r) {
+            if (prefBuilding !== "Any" && r["Building"]     !== prefBuilding) return false;
+            if (prefType     !== "Any" && r["WD Room Type"] !== prefType)     return false;
 
-    function runSearch(masterData, els) {
-        const prefBuilding  = els.bldgSelect.value;
-        const prefRoomType  = els.typeSelect.value;
-        const reqCapacity   = parseInt(els.capInput.value, 10) || 0;
-        const reqZoom        = document.getElementById("cs-zoom").checked;
-        const reqComputerLab = document.getElementById("cs-computer-lab").checked;
-        const reqDvd         = document.getElementById("cs-dvd").checked;
-        const reqRecordStream= document.getElementById("cs-record-stream").checked;
-        const reqVenue       = document.getElementById("cs-venue").checked;
+            const cap = parseInt(r["Seating Capacity"], 10) || 0;
+            if (cap < minCap) return false;
 
-        log("Search params →",
-            { prefBuilding, prefRoomType, reqCapacity, reqZoom, reqComputerLab, reqDvd, reqRecordStream, reqVenue });
+            if (wantZoom   && !isYes(r["Video Conferencing (Zoom Room)"])) return false;
+            if (wantLab    && !isLab(r["Number of Lab Computers"]))        return false;
+            if (wantDvd    && !isYes(r["Optical Drive (DVD/Blu-Ray)"]))    return false;
+            if (wantStream && !isYes(r["Record / Stream"]))                return false;
+            if (wantVenue  && !isYes(r["Is Venue"]))                       return false;
 
-        const filtered = masterData.filter((room) => {
-            if (prefBuilding !== "Any" && room[COLUMNS.building] !== prefBuilding) return false;
-            if (prefRoomType !== "Any" && room[COLUMNS.roomType]  !== prefRoomType)  return false;
-            const cap = parseInt(room[COLUMNS.capacity], 10) || 0;
-            if (cap < reqCapacity) return false;
-            if (reqZoom         && !isYes(room[COLUMNS.zoom]))        return false;
-            if (reqComputerLab  && !isLab(room[COLUMNS.computerLab])) return false;
-            if (reqDvd          && !isYes(room[COLUMNS.dvd]))         return false;
-            if (reqRecordStream && !isYes(room[COLUMNS.recordStream]))return false;
-            if (reqVenue        && !isYes(room[COLUMNS.venue]))       return false;
             return true;
         });
 
-        log("Results:", filtered.length, "room(s) matched.");
-        displayResults(filtered, els.status, els.resultsContainer);
-    }
+        console.log("[CS] Matched:", filtered.length, "room(s).");
+        renderResults(filtered, statusEl, resultsEl);
+    });
+}
 
-    function displayResults(data, statusEl, containerEl) {
-        containerEl.innerHTML = "";
-        statusEl.textContent = `Found ${data.length} space(s).`;
+// =============================================================================
+// renderResults
+// =============================================================================
+function renderResults(data, statusEl, resultsEl) {
+    resultsEl.innerHTML = "";
+    statusEl.textContent = "Found " + data.length + " space(s).";
 
-        data.forEach((room) => {
-            const card = document.createElement("div");
-            card.className = "cs-room-card";
+    data.forEach(function (room) {
+        const card = document.createElement("div");
+        card.className = "cs-card";
 
-            /* Title / link */
-            const title = document.createElement("div");
-            title.className = "cs-room-title";
-            const titleText =
-                `${room[COLUMNS.building] || "Unknown Building"} ${room[COLUMNS.roomNumber] || "Unknown Room"}`.trim();
-            const url = room[COLUMNS.tdxUrl]?.trim() || "";
-
-            if (url) {
-                const a = document.createElement("a");
-                a.href = url;
-                a.target = "_blank";
-                a.rel = "noopener noreferrer";
-                a.textContent = titleText;
-                title.appendChild(a);
-            } else {
-                title.textContent = titleText;
-            }
-            card.appendChild(title);
-
-            /* Basic details */
-            const details = document.createElement("p");
-            details.className = "cs-room-details";
-            details.textContent =
-                `Type: ${room[COLUMNS.roomType] || "N/A"} | Seats: ${room[COLUMNS.capacity] || "N/A"}`;
-            card.appendChild(details);
-
-            /* Feature badges */
-            const badges = document.createElement("div");
-            if (isYes(room[COLUMNS.zoom]))       addBadge(badges, "Zoom");
-            if (isLab(room[COLUMNS.computerLab])) addBadge(badges, `Computer Lab (${room[COLUMNS.computerLab].trim()} stations)`);
-            if (isYes(room[COLUMNS.dvd]))        addBadge(badges, "DVD Player");
-            if (isYes(room[COLUMNS.recordStream]))addBadge(badges, "Record/Stream");
-            if (isYes(room[COLUMNS.venue]))      addBadge(badges, "Venue");
-            if (badges.hasChildNodes()) card.appendChild(badges);
-
-            containerEl.appendChild(card);
-        });
-    }
-
-    function addBadge(container, text) {
-        const span = document.createElement("span");
-        span.className = "cs-badge";
-        span.textContent = text;
-        container.appendChild(span);
-    }
-
-    /* ------------------------------------------------------------------ */
-    /* PAPAPARSE LOADER                                                     */
-    /* ------------------------------------------------------------------ */
-
-    function loadPapaParse(callback) {
-        if (window.Papa) {
-            log("PapaParse already loaded.");
-            callback();
-            return;
-        }
-        log("Loading PapaParse from CDN:", PAPAPARSE_CDN);
-        const s = document.createElement("script");
-        s.src = PAPAPARSE_CDN;
-        s.onload = () => {
-            log("PapaParse loaded successfully.");
-            callback();
-        };
-        s.onerror = () => {
-            error("Failed to load PapaParse from CDN. Check network / CSP settings.");
-        };
-        document.head.appendChild(s);
-    }
-
-    /* ------------------------------------------------------------------ */
-    /* CSV FETCH                                                            */
-    /* ------------------------------------------------------------------ */
-
-    function fetchData(statusEl, callback) {
-        log("Fetching CSV from:", CSV_URL);
-        window.Papa.parse(CSV_URL, {
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-            complete: function (results) {
-                log("CSV parsed. Total rows (raw):", results.data.length);
-
-                if (results.errors && results.errors.length) {
-                    warn("CSV parse warnings:", results.errors);
-                }
-
-                const masterData = results.data.filter((room) =>
-                    isYes(room[COLUMNS.searchable])
-                );
-                log("Searchable rooms:", masterData.length);
-                callback(masterData);
-            },
-            error: function (err) {
-                error("CSV fetch/parse error:", err);
-                statusEl.textContent =
-                    "Error loading room database. Please try again later.";
-            },
-        });
-    }
-
-    /* ------------------------------------------------------------------ */
-    /* INIT                                                                 */
-    /* ------------------------------------------------------------------ */
-
-    function init() {
-        log("init() called.");
-
-        /* 1 — Find or create mount point */
-        let mountEl = document.querySelector(MOUNT_SELECTOR);
-        if (mountEl) {
-            log("Mount point found:", mountEl);
+        // Title / link
+        const titleEl = document.createElement("div");
+        titleEl.className = "cs-card-title";
+        const name = ((room["Building"] || "Unknown") + " " + (room["Room Number"] || "")).trim();
+        const url  = (room["TDx URL"] || "").trim();
+        if (url) {
+            const a   = document.createElement("a");
+            a.href    = url;
+            a.target  = "_blank";
+            a.rel     = "noopener noreferrer";
+            a.textContent = name;
+            titleEl.appendChild(a);
         } else {
-            warn(
-                "Mount point '" + MOUNT_SELECTOR + "' not found in DOM. " +
-                "Add <div class='classroom-search-root'></div> to your TDx article. " +
-                "Falling back to document.body."
-            );
-            mountEl = document.body;
+            titleEl.textContent = name;
         }
+        card.appendChild(titleEl);
 
-        /* 2 — Inject CSS */
-        injectStyles();
+        // Type + capacity
+        const meta = document.createElement("p");
+        meta.className   = "cs-card-meta";
+        meta.textContent = "Type: " + (room["WD Room Type"] || "N/A") +
+                           " | Seats: " + (room["Seating Capacity"] || "N/A");
+        card.appendChild(meta);
 
-        /* 3 — Build UI (returns references to interactive elements) */
-        const els = buildUI(mountEl);
+        // Feature badges
+        const badges = document.createElement("div");
+        if (isYes(room["Video Conferencing (Zoom Room)"]))   addBadge(badges, "Zoom");
+        if (isLab(room["Number of Lab Computers"]))          addBadge(badges, "Computer Lab (" + room["Number of Lab Computers"].trim() + " stations)");
+        if (isYes(room["Optical Drive (DVD/Blu-Ray)"]))      addBadge(badges, "DVD Player");
+        if (isYes(room["Record / Stream"]))                  addBadge(badges, "Record/Stream");
+        if (isYes(room["Is Venue"]))                         addBadge(badges, "Venue");
+        if (badges.hasChildNodes()) card.appendChild(badges);
 
-        /* 4 — Load PapaParse, then fetch CSV */
-        loadPapaParse(function () {
-            fetchData(els.status, function (masterData) {
-                /* 5 — Populate dropdowns */
-                initDropdowns(masterData, els.bldgSelect, els.typeSelect);
+        resultsEl.appendChild(card);
+    });
+}
 
-                /* 6 — Show initial full list */
-                displayResults(masterData, els.status, els.resultsContainer);
-
-                /* 7 — Wire up Search button */
-                els.btn.addEventListener("click", function () {
-                    log("Search button clicked.");
-                    runSearch(masterData, els);
-                });
-
-                log("Initialisation complete.");
-            });
-        });
-    }
-
-    /* ------------------------------------------------------------------ */
-    /* ENTRY POINT                                                          */
-    /* ------------------------------------------------------------------ */
-
-    /* Run after the page has fully loaded so TDx has rendered its DOM.    */
-    if (document.readyState === "loading") {
-        log("Document still loading — attaching DOMContentLoaded listener.");
-        document.addEventListener("DOMContentLoaded", init);
-    } else {
-        log("Document already ready — running init() immediately.");
-        init();
-    }
-
-})();
+// =============================================================================
+// Small helpers
+// =============================================================================
+function isYes(val) {
+    return val && val.toString().toLowerCase().trim() === "yes";
+}
+function isLab(val) {
+    return val && val.toString().trim() !== "" && parseInt(val, 10) > 0;
+}
+function addBadge(container, text) {
+    const span = document.createElement("span");
+    span.className   = "cs-badge";
+    span.textContent = text;
+    container.appendChild(span);
+}
+function appendOpt(select, value, text) {
+    const o = document.createElement("option");
+    o.value = value;
+    o.textContent = text;
+    select.appendChild(o);
+}
+function makeSelect(id, labelText, defaultText) {
+    const wrap = document.createElement("div");
+    wrap.className = "cs-field";
+    const lbl = document.createElement("label");
+    lbl.htmlFor     = id;
+    lbl.textContent = labelText;
+    const sel = document.createElement("select");
+    sel.id = id;
+    appendOpt(sel, "Any", defaultText);
+    wrap.appendChild(lbl);
+    wrap.appendChild(sel);
+    return { wrap: wrap, el: sel };
+}
+function makeNumberInput(id, labelText, placeholder) {
+    const wrap = document.createElement("div");
+    wrap.className = "cs-field";
+    const lbl = document.createElement("label");
+    lbl.htmlFor     = id;
+    lbl.textContent = labelText;
+    const inp = document.createElement("input");
+    inp.type        = "number";
+    inp.id          = id;
+    inp.min         = "1";
+    inp.placeholder = placeholder;
+    wrap.appendChild(lbl);
+    wrap.appendChild(inp);
+    return { wrap: wrap, el: inp };
+}
