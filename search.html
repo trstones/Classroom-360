@@ -178,7 +178,7 @@
 
                 const title = document.createElement('h3');
                 title.className = 'room-title';
-                title.textContent = `${room[COLUMNS.building] || 'Unknown Building'} - ${room[COLUMNS.roomNumber] || 'Unknown Room'}`;
+                title.textContent = `${room[COLUMNS.building] || 'Unknown Building'} ${room[COLUMNS.roomNumber] || 'Unknown Room'}`;
                 
                 const details = document.createElement('p');
                 details.className = 'room-details';
