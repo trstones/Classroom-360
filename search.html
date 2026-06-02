@@ -186,7 +186,7 @@
                 const title = document.createElement('h3');
                 title.className = 'room-title';
                 
-                const titleText = `${room[COLUMNS.building] || 'Unknown Building'} - ${room[COLUMNS.roomNumber] || 'Unknown Room'}`;
+                const titleText = `${room[COLUMNS.building] || 'Unknown Building'} ${room[COLUMNS.roomNumber] || 'Unknown Room'}`;
                 const url = room[COLUMNS.tdxUrl] ? room[COLUMNS.tdxUrl].trim() : '';
 
                 if (url) {
