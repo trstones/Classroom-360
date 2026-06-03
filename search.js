@@ -55,7 +55,7 @@ window.addEventListener("load", function () {
             .cs-btn:hover { background: #004494; }
             .cs-status { margin-bottom: 15px; font-style: italic; color: #666; }
             .cs-card { background: white; border: 1px solid #e1e1e1; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,.05); }
-            .cs-card-title { font-size: 1.2em; font-weight: bold; margin: 0 0 8px; color: #0056b3; }
+            .cs-card-title { font-size: 1.2em; font-weight: normal; margin: 0 0 8px; color: #0056b3; }
             .cs-card-title a { color: #0056b3; text-decoration: none; }
             .cs-card-title a:hover { text-decoration: underline; }
             .cs-card-meta { margin: 0 0 6px; font-size: .9em; line-height: 1.5; }
